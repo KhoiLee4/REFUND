@@ -8,7 +8,7 @@ void Player::initVariables()
 
 void Player::initTexture()
 {
-	if (!this->textureSheet.loadFromFile("Textures/Thief_sheet.png"))
+	if (!this->textureSheet.loadFromFile("Data/Textures/Character/Thief_sheet.png"))
 	{
 		std::cout << "ERROR::PLAYER::Could not load the player sheet!" << '\n';
 	}
@@ -71,25 +71,14 @@ void Player::updateAnimation()
 	if (this->animState == PLAYER_ANIMATION_STATES::IDLE) 
 	{
 		if (this->animationTimer.getElapsedTime().asSeconds() >= 0.2f)
-		{ 
-			this->currentFrame.top = 0;
-			this->currentFrame.left = 0;
-			this->sprite.setTextureRect(this->currentFrame);
-		}
-	}
-	else if (this->animState == PLAYER_ANIMATION_STATES::MOVING_DOWN)
-	{
-		if (this->animationTimer.getElapsedTime().asSeconds() >= 0.2f)
 		{
-			this->currentFrame.left += 32.f;
-			if (this->currentFrame.left >= 128.f)
-				this->currentFrame.left = 0;
-
+			this->currentFrame.top = 0.f;
+			this->currentFrame.left = 0.f;
 			this->animationTimer.restart();
 			this->sprite.setTextureRect(this->currentFrame);
 		}
 	}
-	else if (this->animState == PLAYER_ANIMATION_STATES::MOVING_LEFT)
+	else if (this->animState == PLAYER_ANIMATION_STATES::MOVING_DOWN)
 	{
 		if (this->animationTimer.getElapsedTime().asSeconds() >= 0.2f)
 		{
@@ -102,7 +91,7 @@ void Player::updateAnimation()
 			this->sprite.setTextureRect(this->currentFrame);
 		}
 	}
-	else if (this->animState == PLAYER_ANIMATION_STATES::MOVING_RIGHT)
+	else if (this->animState == PLAYER_ANIMATION_STATES::MOVING_LEFT)
 	{
 		if (this->animationTimer.getElapsedTime().asSeconds() >= 0.2f)
 		{
@@ -115,11 +104,24 @@ void Player::updateAnimation()
 			this->sprite.setTextureRect(this->currentFrame);
 		}
 	}
-	else if (this->animState == PLAYER_ANIMATION_STATES::MOVING_UP)
+	else if (this->animState == PLAYER_ANIMATION_STATES::MOVING_RIGHT)
 	{
 		if (this->animationTimer.getElapsedTime().asSeconds() >= 0.2f)
 		{
 			this->currentFrame.top = 144.f;
+			this->currentFrame.left += 32.f;
+			if (this->currentFrame.left >= 128.f)
+				this->currentFrame.left = 0;
+
+			this->animationTimer.restart();
+			this->sprite.setTextureRect(this->currentFrame);
+		}
+	}
+	else if (this->animState == PLAYER_ANIMATION_STATES::MOVING_UP)
+	{
+		if (this->animationTimer.getElapsedTime().asSeconds() >= 0.2f)
+		{
+			this->currentFrame.top = 192.f;
 			this->currentFrame.left += 32.f;
 			if (this->currentFrame.left >= 128.f)
 				this->currentFrame.left = 0;
