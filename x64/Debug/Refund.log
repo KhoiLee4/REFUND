@@ -1,47 +1,14 @@
-﻿  Player.cpp
-C:\Users\ASUS\Desktop\Refund\Refund\Player.cpp(80,30): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+﻿  Item.cpp
+  Menu.cpp
+C:\Users\ADMIN\Desktop\Text\Refund\Menu.cpp(86,48): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
           with
           [
-              T=int
+              T=unsigned int
           ]
-C:\Users\ASUS\Desktop\Refund\Refund\Player.cpp(89,29): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+C:\Users\ADMIN\Desktop\Text\Refund\Menu.cpp(86,30): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
           with
           [
-              T=int
+              T=unsigned int
           ]
-C:\Users\ASUS\Desktop\Refund\Refund\Player.cpp(90,31): warning C4244: '+=': conversion from 'float' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-C:\Users\ASUS\Desktop\Refund\Refund\Player.cpp(102,29): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-C:\Users\ASUS\Desktop\Refund\Refund\Player.cpp(103,31): warning C4244: '+=': conversion from 'float' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-C:\Users\ASUS\Desktop\Refund\Refund\Player.cpp(115,29): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-C:\Users\ASUS\Desktop\Refund\Refund\Player.cpp(116,31): warning C4244: '+=': conversion from 'float' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-C:\Users\ASUS\Desktop\Refund\Refund\Player.cpp(128,29): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-C:\Users\ASUS\Desktop\Refund\Refund\Player.cpp(129,31): warning C4244: '+=': conversion from 'float' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-  Refund.vcxproj -> C:\Users\ASUS\Desktop\Refund\Refund\x64\Debug\Refund.exe
+  Generating Code...
+  Refund.vcxproj -> C:\Users\ADMIN\Desktop\Text\Refund\x64\Debug\Refund.exe
