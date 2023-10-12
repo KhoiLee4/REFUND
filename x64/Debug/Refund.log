@@ -1,50 +1,45 @@
 ﻿  Player.cpp
-C:\Users\ASUS\Desktop\Refund\Refund\Player.cpp(75,29): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+C:\Users\ASUS\Desktop\Refund\Refund\Player.cpp(80,30): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
           with
           [
               T=int
           ]
-C:\Users\ASUS\Desktop\Refund\Refund\Player.cpp(76,30): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+C:\Users\ASUS\Desktop\Refund\Refund\Player.cpp(89,29): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
           with
           [
               T=int
           ]
-C:\Users\ASUS\Desktop\Refund\Refund\Player.cpp(85,29): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+C:\Users\ASUS\Desktop\Refund\Refund\Player.cpp(90,31): warning C4244: '+=': conversion from 'float' to 'T', possible loss of data
           with
           [
               T=int
           ]
-C:\Users\ASUS\Desktop\Refund\Refund\Player.cpp(86,31): warning C4244: '+=': conversion from 'float' to 'T', possible loss of data
+C:\Users\ASUS\Desktop\Refund\Refund\Player.cpp(102,29): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
           with
           [
               T=int
           ]
-C:\Users\ASUS\Desktop\Refund\Refund\Player.cpp(98,29): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+C:\Users\ASUS\Desktop\Refund\Refund\Player.cpp(103,31): warning C4244: '+=': conversion from 'float' to 'T', possible loss of data
           with
           [
               T=int
           ]
-C:\Users\ASUS\Desktop\Refund\Refund\Player.cpp(99,31): warning C4244: '+=': conversion from 'float' to 'T', possible loss of data
+C:\Users\ASUS\Desktop\Refund\Refund\Player.cpp(115,29): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
           with
           [
               T=int
           ]
-C:\Users\ASUS\Desktop\Refund\Refund\Player.cpp(111,29): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+C:\Users\ASUS\Desktop\Refund\Refund\Player.cpp(116,31): warning C4244: '+=': conversion from 'float' to 'T', possible loss of data
           with
           [
               T=int
           ]
-C:\Users\ASUS\Desktop\Refund\Refund\Player.cpp(112,31): warning C4244: '+=': conversion from 'float' to 'T', possible loss of data
+C:\Users\ASUS\Desktop\Refund\Refund\Player.cpp(128,29): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
           with
           [
               T=int
           ]
-C:\Users\ASUS\Desktop\Refund\Refund\Player.cpp(124,29): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-C:\Users\ASUS\Desktop\Refund\Refund\Player.cpp(125,31): warning C4244: '+=': conversion from 'float' to 'T', possible loss of data
+C:\Users\ASUS\Desktop\Refund\Refund\Player.cpp(129,31): warning C4244: '+=': conversion from 'float' to 'T', possible loss of data
           with
           [
               T=int

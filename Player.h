@@ -4,7 +4,7 @@ enum PLAYER_ANIMATION_STATES {IDLE = 0, MOVING_LEFT, MOVING_RIGHT, MOVING_UP, MO
 class Player
 {
 private:
-	sf::Sprite sprite;
+	sf::Sprite sprite_thief;
 	sf::Texture textureSheet;
 	sf::Clock animationTimer;
 

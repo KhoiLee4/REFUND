@@ -16,10 +16,10 @@ void Player::initTexture()
 
 void Player::initSprite()
 {
-	this->sprite.setTexture(this->textureSheet);
+	this->sprite_thief.setTexture(this->textureSheet);
 	this->currentFrame = sf::IntRect(0,0,32,48);
-	this->sprite.setTextureRect(this->currentFrame); //Cutting sprite
-	this->sprite.setScale(1.5f, 1.5f); //Increase sprite size
+	this->sprite_thief.setTextureRect(this->currentFrame); //Cutting sprite
+	this->sprite_thief.setScale(1.5f, 1.5f); //Increase sprite size
 }
 
 void Player::initAnimations()
@@ -40,30 +40,35 @@ Player::~Player()
 }
 
 void Player::updateMovement()
-{
-	this->animState = PLAYER_ANIMATION_STATES::IDLE;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) //Left
+{	
+	float moveSpeed = 1.0f;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::RShift))
 	{
-		this->sprite.move(-1.f, 0.f);
-		this->animState = PLAYER_ANIMATION_STATES::MOVING_LEFT;
+		moveSpeed = 0.5f;
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) //Right
-	{
-		this->sprite.move(1.f, 0.f);
-		this->animState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
-	}
+		this->animState = PLAYER_ANIMATION_STATES::IDLE;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) //Left
+		{
+			this->sprite_thief.move(-moveSpeed, 0.f);
+			this->animState = PLAYER_ANIMATION_STATES::MOVING_LEFT;
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) //Right
+		{
+			this->sprite_thief.move(moveSpeed, 0.f);
+			this->animState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
+		}
 
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) //Top
-	{
-		this->sprite.move(0.f, -1.f);
-		this->animState = PLAYER_ANIMATION_STATES::MOVING_UP;
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) //Down
-	{
-		this->sprite.move(0.f, 1.f);
-		this->animState = PLAYER_ANIMATION_STATES::MOVING_DOWN;
-	}
-	else this->animState = PLAYER_ANIMATION_STATES::IDLE;
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) //Top
+		{
+			this->sprite_thief.move(0.f, -moveSpeed);
+			this->animState = PLAYER_ANIMATION_STATES::MOVING_UP;
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) //Down
+		{
+			this->sprite_thief.move(0.f, moveSpeed);
+			this->animState = PLAYER_ANIMATION_STATES::MOVING_DOWN;
+		}
+		else this->animState = PLAYER_ANIMATION_STATES::IDLE;
 }
 
 void Player::updateAnimation()
@@ -72,10 +77,9 @@ void Player::updateAnimation()
 	{
 		if (this->animationTimer.getElapsedTime().asSeconds() >= 0.2f)
 		{
-			this->currentFrame.top = 0.f;
 			this->currentFrame.left = 0.f;
 			this->animationTimer.restart();
-			this->sprite.setTextureRect(this->currentFrame);
+			this->sprite_thief.setTextureRect(this->currentFrame);
 		}
 	}
 	else if (this->animState == PLAYER_ANIMATION_STATES::MOVING_DOWN)
@@ -88,7 +92,7 @@ void Player::updateAnimation()
 				this->currentFrame.left = 0;
 
 			this->animationTimer.restart();
-			this->sprite.setTextureRect(this->currentFrame);
+			this->sprite_thief.setTextureRect(this->currentFrame);
 		}
 	}
 	else if (this->animState == PLAYER_ANIMATION_STATES::MOVING_LEFT)
@@ -101,7 +105,7 @@ void Player::updateAnimation()
 				this->currentFrame.left = 0;
 
 			this->animationTimer.restart();
-			this->sprite.setTextureRect(this->currentFrame);
+			this->sprite_thief.setTextureRect(this->currentFrame);
 		}
 	}
 	else if (this->animState == PLAYER_ANIMATION_STATES::MOVING_RIGHT)
@@ -114,7 +118,7 @@ void Player::updateAnimation()
 				this->currentFrame.left = 0;
 
 			this->animationTimer.restart();
-			this->sprite.setTextureRect(this->currentFrame);
+			this->sprite_thief.setTextureRect(this->currentFrame);
 		}
 	}
 	else if (this->animState == PLAYER_ANIMATION_STATES::MOVING_UP)
@@ -127,7 +131,7 @@ void Player::updateAnimation()
 				this->currentFrame.left = 0;
 
 			this->animationTimer.restart();
-			this->sprite.setTextureRect(this->currentFrame);
+			this->sprite_thief.setTextureRect(this->currentFrame);
 		}
 	}
 
@@ -141,5 +145,5 @@ void Player::update()
 
 void Player::render(sf::RenderTarget& target)
 {
-	target.draw(this->sprite);
+	target.draw(this->sprite_thief);
 }
