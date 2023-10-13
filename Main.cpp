@@ -11,6 +11,8 @@ int main()
         game.update();
         game.render();
     }
+    //test loi commit
+    
     //End of application
     return 0;
 }
