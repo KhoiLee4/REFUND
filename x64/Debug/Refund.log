@@ -1,14 +1,5 @@
-﻿  Item.cpp
-  Menu.cpp
-C:\Users\ADMIN\Desktop\Text\Refund\Menu.cpp(86,48): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
-          with
-          [
-              T=unsigned int
-          ]
-C:\Users\ADMIN\Desktop\Text\Refund\Menu.cpp(86,30): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
-          with
-          [
-              T=unsigned int
-          ]
+﻿  Game.cpp
+  Item.cpp
+  Main.cpp
   Generating Code...
-  Refund.vcxproj -> C:\Users\ADMIN\Desktop\Text\Refund\x64\Debug\Refund.exe
+  Refund.vcxproj -> C:\Users\ASUS\Desktop\Refund\Refund\x64\Debug\Refund.exe

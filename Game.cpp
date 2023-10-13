@@ -9,6 +9,11 @@ void Game::initWindow()
 	this->window.setFramerateLimit(144);
 }
 
+void Game::initItem()
+{
+	this->item = new Item();
+}
+
 void Game::initPlayer()
 {
 	this->player = new Player();
@@ -17,11 +22,18 @@ void Game::initPlayer()
 Game::Game()
 {
 	this->initWindow();
+	this->initItem();
 	this->initPlayer();
 }
 Game::~Game()
 {
+	delete this->item;
 	delete this->player;
+}
+
+void Game::updateItem()
+{
+	this->item->update();
 }
 
 void Game::updatePlayer()
@@ -40,7 +52,13 @@ void Game::update()
 			this->window.close();
 	}
 
+	this->updateItem();
 	this->updatePlayer();
+}
+
+void Game::renderItem()
+{
+	this->item->render(this->window);
 }
 
 void Game::renderPlayer()
@@ -53,6 +71,7 @@ void Game::render()
 	this->window.clear();
 
 	//Render game
+	this->renderItem();
 	this->renderPlayer();
 	this->window.display();
 }

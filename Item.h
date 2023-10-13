@@ -4,12 +4,12 @@ class Item
 {
 private:
     std::vector<sf::Texture> itemTextures;
-    sf::Sprite  sprite_pick, sprite_next;
-    int currentItem=0, pickItem;
-
-    sf::IntRect currentFrame;
-    void initSpritePick();
-    void initSpriteNext();
+    sf::Sprite  pickSprite, currentSprite;
+    bool keyPressed = false, keyPressed1 = false;
+    //int currentItem=0, pickItem=0;
+    //sf::Clock debounceTime;
+    void initcurrentSprite();
+    void initpickSprite();
     void initTexture();
     void initSprite();
 public:
@@ -18,8 +18,8 @@ public:
     
     //Functions
     //void updatePick();
-    void updatePick();
-    void updateNext();
+    void pickUpdate();
+    void currentUpdate();
     void update();
     void render(sf::RenderTarget& target);
     //Functions

@@ -1,11 +1,11 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "Item.h"
-
 
 void Item::initTexture()
 {
     for (int i = 1; i <= 6; i++) {
         sf::Texture texture;
+        
         if (texture.loadFromFile("Data/Textures/Items/item" + std::to_string(i) + ".png")) {
             this->itemTextures.push_back(texture);
         }
@@ -14,20 +14,19 @@ void Item::initTexture()
         }
     }
 }
-void Item::initSpritePick()
+void Item::initcurrentSprite()
 {
-    sprite_pick.setPosition(100, 200);
-    this->sprite_pick.setTexture(this->itemTextures[currentItem]);
+    this->currentSprite.setPosition(100, 200);
+    this->currentSprite.setTexture(this->itemTextures.front());
 }
-void Item::initSpriteNext()
+void Item::initpickSprite()
 {
-    sprite_next.setPosition(200, 300);
-    this->sprite_next.setTexture(this->itemTextures[currentItem]);
+    this->pickSprite.setPosition(200, 300);
 }
 void Item::initSprite()
 {
-    this->initSpriteNext();
-    this->initSpritePick();
+    this->initpickSprite();
+    this->initcurrentSprite();
 }
 Item::Item()
 {
@@ -38,32 +37,43 @@ Item::Item()
 Item::~Item()
 {
 }
-void Item::updatePick()
+void Item::pickUpdate()
 {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E)) {
-        if (this->currentItem < this->itemTextures.size()) {
-            this->currentItem++;
-            this->initSpritePick();
-        }
+    //int eKeyPressCount = 0;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E) && !this->keyPressed) {
+        //eKeyPressCount++;
+        this->pickSprite.setTexture(this->itemTextures.front());
+        this->keyPressed = true;
     }
+    //if (sf::Event::KeyReleased && sf::Keyboard::E) {
+    //    // Thiết lập lại biến khi phím "E" được nhãn
+    //    keyPressed = false;
+    //}
+    //std:: cout << eKeyPressCount;
 }
-void Item::updateNext()
+void Item::currentUpdate()
 {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E)) {
-        if (this->currentItem < this->itemTextures.size()) {
-            this->pickItem = this->currentItem;
-            this->initSpriteNext();
-        }
+    //int eKeyPressCount = 0;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E) && !this->keyPressed1) {
+        itemTextures.erase(itemTextures.begin());
+        this->currentSprite.setTexture(this->itemTextures.front());
+        //eKeyPressCount++;
+        this->keyPressed1 = true;
     }
+    //if (sf::Event::KeyReleased && sf::Keyboard::E) {
+    //    // Thiết lập lại biến khi phím "E" được nhãn
+    //    keyPressed = false;
+    //}
+    //std::cout << eKeyPressCount;
 }
 void Item::update()
 {
-    this->updatePick();
-    this->updateNext();
+    this->pickUpdate();
+    this->currentUpdate();
 }
 void Item::render(sf::RenderTarget& target)
 {
-    target.draw(this->sprite_next);
-    target.draw(this->sprite_pick);
+    target.draw(this->currentSprite);
+    target.draw(this->pickSprite);
 }
 
