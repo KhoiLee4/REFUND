@@ -3,7 +3,8 @@
 
 void Item::initTexture()
 {
-    for (int i = 1; i <= 6; i++) {
+    for (int i = 1; i <= 6; i++) 
+    {
         sf::Texture texture;
         
         if (texture.loadFromFile("Data/Textures/Items/item" + std::to_string(i) + ".png")) {
@@ -17,15 +18,11 @@ void Item::initTexture()
 void Item::initcurrentSprite()
 {
     this->currentSprite.setPosition(100, 200);
-    this->currentSprite.setTexture(this->itemTextures.front());
+    this->currentSprite.setTexture(this->itemTextures[currentItem]);
 }
-void Item::initpickSprite()
-{
-    this->pickSprite.setPosition(200, 300);
-}
+
 void Item::initSprite()
 {
-    this->initpickSprite();
     this->initcurrentSprite();
 }
 Item::Item()
@@ -33,47 +30,32 @@ Item::Item()
 	this->initTexture();
     this->initSprite();
 }
-
 Item::~Item()
 {
 }
-void Item::pickUpdate()
-{
-    //int eKeyPressCount = 0;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E) && !this->keyPressed) {
-        //eKeyPressCount++;
-        this->pickSprite.setTexture(this->itemTextures.front());
-        this->keyPressed = true;
-    }
-    //if (sf::Event::KeyReleased && sf::Keyboard::E) {
-    //    // Thiết lập lại biến khi phím "E" được nhãn
-    //    keyPressed = false;
-    //}
-    //std:: cout << eKeyPressCount;
-}
-void Item::currentUpdate()
-{
-    //int eKeyPressCount = 0;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E) && !this->keyPressed1) {
-        itemTextures.erase(itemTextures.begin());
-        this->currentSprite.setTexture(this->itemTextures.front());
-        //eKeyPressCount++;
-        this->keyPressed1 = true;
-    }
-    //if (sf::Event::KeyReleased && sf::Keyboard::E) {
-    //    // Thiết lập lại biến khi phím "E" được nhãn
-    //    keyPressed = false;
-    //}
-    //std::cout << eKeyPressCount;
-}
 void Item::update()
 {
-    this->pickUpdate();
-    this->currentUpdate();
+    //float thresholdDistance = 1.0f; // Khoảng cách tối thiểu để xem là đã đến gần
+    //int eKeyPressCount = 0;
+    //std::cout << player->getCurrentPosition().x << ' ' << player->getCurrentPosition().y;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E) && !this->keyPressed)
+        {
+            currentItem++;
+            if (currentItem < itemTextures.size())
+            {
+                this->currentSprite.setTexture(this->itemTextures[currentItem]);
+                //eKeyPressCount++;
+            }
+            this->keyPressed = true;
+        }
+    //if (sf::Event::KeyReleased && sf::Keyboard::E) {
+    //    // Thiết lập lại biến khi phím "E" được nhãn
+    //    this->keyPressed1 = false;
+    //}
+    //std::cout << eKeyPressCount;
 }
 void Item::render(sf::RenderTarget& target)
 {
     target.draw(this->currentSprite);
-    target.draw(this->pickSprite);
 }
 

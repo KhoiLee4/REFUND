@@ -4,10 +4,9 @@ enum PLAYER_ANIMATION_STATES {IDLE = 0, MOVING_LEFT, MOVING_RIGHT, MOVING_UP, MO
 class Player
 {
 private:
-	sf::Sprite sprite_thief;
+	sf::Sprite thiefSprite;
 	sf::Texture textureSheet;
 	sf::Clock animationTimer;
-
 	//Animation
 	short animState;
 	sf::IntRect currentFrame;
@@ -23,6 +22,7 @@ public:
 	virtual ~Player();
 
 	//Functions
+	sf::Vector2f getThiefPosition();
 	void updateMovement();
 	void updateAnimation();
 	void update();

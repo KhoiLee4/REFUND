@@ -9,6 +9,16 @@ void Game::initWindow()
 	this->window.setFramerateLimit(144);
 }
 
+void Game::initLocation()
+{
+	this->location = new Location();
+}
+
+void Game::initItemPick()
+{
+	this->itemPick = new ItemPick();
+}
+
 void Game::initItem()
 {
 	this->item = new Item();
@@ -22,15 +32,40 @@ void Game::initPlayer()
 Game::Game()
 {
 	this->initWindow();
+	this->initLocation();
+	this->initItemPick();
 	this->initItem();
 	this->initPlayer();
 }
 Game::~Game()
 {
+	delete this->location;
+	delete this->itemPick;
 	delete this->item;
 	delete this->player;
 }
-
+void Game::updateLocation()
+{
+	this->location->update();
+}
+void Game::updatePickSpritePosition()
+{
+	float pickX, pickY;
+	pickX = this->player->getThiefPosition().x;
+	pickY = this->player->getThiefPosition().y;
+	this->itemPick->pickSprite.setPosition(pickX, pickY - 1.0f);
+}
+void Game::updateItemPick()
+{
+	this->itemPick->update();
+}
+//bool Game::isNearObject(const sf::Vector2f& objectPosition, const sf::Vector2f& targetPosition, float thresholdDistance)
+//{
+//	float distance = std::sqrt((objectPosition.x - targetPosition.x) * (objectPosition.x - targetPosition.x) +
+//		(objectPosition.y - targetPosition.y) * (objectPosition.y - targetPosition.y));
+//
+//	return distance <= thresholdDistance;
+//}
 void Game::updateItem()
 {
 	this->item->update();
@@ -51,9 +86,21 @@ void Game::update()
 		else if (this->ev.type == sf::Event::KeyPressed && this->ev.key.code == sf::Keyboard::Escape)
 			this->window.close();
 	}
-
+	this->updateLocation();
+	this->updatePickSpritePosition();
+	this->updateItemPick();
 	this->updateItem();
 	this->updatePlayer();
+}
+
+void Game::renderLocation()
+{
+	this->location->render(this->window);
+}
+
+void Game::renderItemPick()
+{
+	this->itemPick->render(this->window);
 }
 
 void Game::renderItem()
@@ -71,6 +118,8 @@ void Game::render()
 	this->window.clear();
 
 	//Render game
+	this->renderLocation();
+	this->renderItemPick();
 	this->renderItem();
 	this->renderPlayer();
 	this->window.display();

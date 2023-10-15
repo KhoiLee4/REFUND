@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "Player.h"
 
 void Player::initVariables()
@@ -16,10 +16,10 @@ void Player::initTexture()
 
 void Player::initSprite()
 {
-	this->sprite_thief.setTexture(this->textureSheet);
+	this->thiefSprite.setTexture(this->textureSheet);
 	this->currentFrame = sf::IntRect(0,0,32,48);
-	this->sprite_thief.setTextureRect(this->currentFrame); //Cutting sprite
-	this->sprite_thief.setScale(1.5f, 1.5f); //Increase sprite size
+	this->thiefSprite.setTextureRect(this->currentFrame); //Cutting sprite
+	this->thiefSprite.setScale(1.5f, 1.5f); //Increase sprite size
 }
 
 void Player::initAnimations()
@@ -39,6 +39,24 @@ Player::~Player()
 {
 }
 
+//sf::Vector2f Player::getCurrentPosition(const sf::Drawable& drawable)
+//{
+//	if (const sf::Transformable* transformable = dynamic_cast<const sf::Transformable*>(&drawable)) {
+//		// Kiểm tra xem drawable có thể biến đổi không (có thể lấy tọa độ không)
+//		return transformable->getPosition();
+//	}
+//	else {
+//		// Nếu không thể lấy tọa độ, trả về một giá trị mặc định hoặc ném một ngoại lệ.
+//		// Ở đây, chúng ta trả về (0, 0) làm giá trị mặc định.
+//		return sf::Vector2f(0, 0);
+//	}
+//}
+
+sf::Vector2f Player::getThiefPosition()
+{
+	return this->thiefSprite.getPosition();
+}
+
 void Player::updateMovement()
 {	
 	float moveSpeed = 1.0f;
@@ -49,23 +67,23 @@ void Player::updateMovement()
 		this->animState = PLAYER_ANIMATION_STATES::IDLE;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) //Left
 		{
-			this->sprite_thief.move(-moveSpeed, 0.f);
+			this->thiefSprite.move(-moveSpeed, 0.f);
 			this->animState = PLAYER_ANIMATION_STATES::MOVING_LEFT;
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) //Right
 		{
-			this->sprite_thief.move(moveSpeed, 0.f);
+			this->thiefSprite.move(moveSpeed, 0.f);
 			this->animState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
 		}
 
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) //Top
 		{
-			this->sprite_thief.move(0.f, -moveSpeed);
+			this->thiefSprite.move(0.f, -moveSpeed);
 			this->animState = PLAYER_ANIMATION_STATES::MOVING_UP;
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) //Down
 		{
-			this->sprite_thief.move(0.f, moveSpeed);
+			this->thiefSprite.move(0.f, moveSpeed);
 			this->animState = PLAYER_ANIMATION_STATES::MOVING_DOWN;
 		}
 		else this->animState = PLAYER_ANIMATION_STATES::IDLE;
@@ -79,7 +97,7 @@ void Player::updateAnimation()
 		{
 			this->currentFrame.left = 0.f;
 			this->animationTimer.restart();
-			this->sprite_thief.setTextureRect(this->currentFrame);
+			this->thiefSprite.setTextureRect(this->currentFrame);
 		}
 	}
 	else if (this->animState == PLAYER_ANIMATION_STATES::MOVING_DOWN)
@@ -92,7 +110,7 @@ void Player::updateAnimation()
 				this->currentFrame.left = 0;
 
 			this->animationTimer.restart();
-			this->sprite_thief.setTextureRect(this->currentFrame);
+			this->thiefSprite.setTextureRect(this->currentFrame);
 		}
 	}
 	else if (this->animState == PLAYER_ANIMATION_STATES::MOVING_LEFT)
@@ -105,7 +123,7 @@ void Player::updateAnimation()
 				this->currentFrame.left = 0;
 
 			this->animationTimer.restart();
-			this->sprite_thief.setTextureRect(this->currentFrame);
+			this->thiefSprite.setTextureRect(this->currentFrame);
 		}
 	}
 	else if (this->animState == PLAYER_ANIMATION_STATES::MOVING_RIGHT)
@@ -118,7 +136,7 @@ void Player::updateAnimation()
 				this->currentFrame.left = 0;
 
 			this->animationTimer.restart();
-			this->sprite_thief.setTextureRect(this->currentFrame);
+			this->thiefSprite.setTextureRect(this->currentFrame);
 		}
 	}
 	else if (this->animState == PLAYER_ANIMATION_STATES::MOVING_UP)
@@ -131,7 +149,7 @@ void Player::updateAnimation()
 				this->currentFrame.left = 0;
 
 			this->animationTimer.restart();
-			this->sprite_thief.setTextureRect(this->currentFrame);
+			this->thiefSprite.setTextureRect(this->currentFrame);
 		}
 	}
 
@@ -145,5 +163,5 @@ void Player::update()
 
 void Player::render(sf::RenderTarget& target)
 {
-	target.draw(this->sprite_thief);
+	target.draw(this->thiefSprite);
 }
