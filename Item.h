@@ -5,6 +5,7 @@ class Item
 private:
     std::vector<sf::Texture> itemTextures;
     sf::Sprite currentSprite;
+
     bool keyPressed = false; 
     int currentItem = 0;
 
@@ -15,8 +16,9 @@ private:
 public:
     Item();
     virtual ~Item();
-    
+
     //Functions
+    sf::Vector2f getItemPosition();
     void update();
     void render(sf::RenderTarget& target);
     //Functions

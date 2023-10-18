@@ -27,14 +27,17 @@ public:
 	Game();
 	virtual ~Game();
 
-	//Functions
-	//bool isNearObject(const sf::Vector2f& objectPosition, const sf::Vector2f& targetPosition, float thresholdDistance);
+	//Functions 
+	
+	void updateNearTruck();
+	bool isNearObject(const sf::Vector2f& objectPosition, const sf::Vector2f& targetPosition, float thresholdDistance);
 	void updateLocation();
 	void updatePickSpritePosition();
-	void updateItemPick();
-	void updateItem();
+	//void updateItemPick();
+	//void updateItem();
 	void updatePlayer();
 	void update();
+	void renderNearLocation();
 	void renderLocation();
 	void renderItemPick();
 	void renderItem();

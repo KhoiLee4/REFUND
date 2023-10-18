@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "Game.h"
 
 void Game::initWindow()
@@ -44,10 +44,10 @@ Game::~Game()
 	delete this->item;
 	delete this->player;
 }
-void Game::updateLocation()
-{
-	this->location->update();
-}
+//void Game::updateLocation()
+//{
+//	this->location->update();
+//}
 void Game::updatePickSpritePosition()
 {
 	float pickX, pickY;
@@ -55,21 +55,34 @@ void Game::updatePickSpritePosition()
 	pickY = this->player->getThiefPosition().y;
 	this->itemPick->pickSprite.setPosition(pickX, pickY - 1.0f);
 }
-void Game::updateItemPick()
-{
-	this->itemPick->update();
-}
-//bool Game::isNearObject(const sf::Vector2f& objectPosition, const sf::Vector2f& targetPosition, float thresholdDistance)
+//void Game::updateItemPick()
 //{
-//	float distance = std::sqrt((objectPosition.x - targetPosition.x) * (objectPosition.x - targetPosition.x) +
-//		(objectPosition.y - targetPosition.y) * (objectPosition.y - targetPosition.y));
-//
-//	return distance <= thresholdDistance;
+//	this->itemPick->update();
 //}
-void Game::updateItem()
+void Game::updateNearTruck()
 {
-	this->item->update();
+	float thresholdDistance = 20.0f; // Khoảng cách tối thiểu để xem là đã đến gần
+	if (isNearObject(this->player->getThiefPosition(), this->item->getItemPosition(), thresholdDistance))
+	{
+		this->item->update();
+		this->itemPick->update();
+	}
 }
+bool Game::isNearObject(const sf::Vector2f& objectPosition, const sf::Vector2f& targetPosition, float thresholdDistance)
+{
+	float distance = std::sqrt((objectPosition.x - targetPosition.x) * (objectPosition.x - targetPosition.x) +
+		(objectPosition.y - targetPosition.y) * (objectPosition.y - targetPosition.y));
+
+	return distance <= thresholdDistance;
+}
+void Game::updateLocation()
+{
+	this->location->update();
+}
+//void Game::updateItem()
+//{
+//	this->item->update();
+//}
 
 void Game::updatePlayer()
 {
@@ -86,11 +99,22 @@ void Game::update()
 		else if (this->ev.type == sf::Event::KeyPressed && this->ev.key.code == sf::Keyboard::Escape)
 			this->window.close();
 	}
+	this->updateNearTruck();
 	this->updateLocation();
 	this->updatePickSpritePosition();
-	this->updateItemPick();
-	this->updateItem();
+	//this->updateItemPick();
+	//this->updateItem();
 	this->updatePlayer();
+}
+
+void Game::renderNearLocation()
+{
+	float thresholdDistance = 20.0f; // Khoảng cách tối thiểu để xem là đã đến gần
+	if (isNearObject(this->player->getThiefPosition(), this->location->getLocationPosition(), thresholdDistance))
+	{
+		this->location->renderItem(this->window);
+		this->location->updateItem();
+	}
 }
 
 void Game::renderLocation()
@@ -118,7 +142,17 @@ void Game::render()
 	this->window.clear();
 
 	//Render game
+	this->renderNearLocation();
 	this->renderLocation();
+	//for (int i = 0; i < 6; i++)
+	//{
+	//	this->window.draw(this->location->itemSprite[i]);
+	//}
+	/*for (int i = 0; i < this->location->locationSprite.size(); i++)
+	{
+		this->window.draw(this->location->locationSprite[i]);
+	}*/
+
 	this->renderItemPick();
 	this->renderItem();
 	this->renderPlayer();
