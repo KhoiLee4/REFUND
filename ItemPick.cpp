@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "ItemPick.h"
 
 void ItemPick::initTexture()
@@ -25,20 +25,27 @@ ItemPick::~ItemPick()
 {
 }
 
+void ItemPick::updatePick()
+{
+    if (pickItem < itemTextures.size())
+    {
+        this->pickSprite.setTexture(this->itemTextures[pickItem]);
+        this->pickItem++;
+        this->eraseItem = true;
+    }
+}
+
+void ItemPick::updateRestore()
+{
+    this->eraseItem = false;
+}
+
 void ItemPick::update()
 {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E) && !this->keyPressed)
-    {
-        if (pickItem < itemTextures.size())
-        {
-            this->pickSprite.setTexture(this->itemTextures[pickItem]);
-            pickItem++;
-        }
-        this->keyPressed = true;
-    }
 }
 
 void ItemPick::render(sf::RenderTarget& target)
 {
-	target.draw(this->pickSprite);
+	if(this->eraseItem == true) 
+        target.draw(this->pickSprite);
 }

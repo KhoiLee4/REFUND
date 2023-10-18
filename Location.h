@@ -13,7 +13,8 @@ private:
 	sf::Sprite itemSprite;
 	sf::Sprite locationSprite;
 	bool keyPressed = false;
-	bool eraseItem = false;
+	
+	//bool keyE = true;
 
 	void initItemTextures();
 	void initItemSprite();
@@ -27,6 +28,8 @@ private:
 public:
 	Location();
 	virtual ~Location();
+
+	bool eraseItem = true;
 
 	//Fuctions
 	sf::Vector2f getLocationPosition();
