@@ -33,11 +33,15 @@ Item::Item()
 Item::~Item()
 {
 }
+sf::Vector2f Item::getItemPosition()
+{
+    return this->currentSprite.getPosition();
+}
 void Item::update()
 {
-    //float thresholdDistance = 1.0f; // Khoảng cách tối thiểu để xem là đã đến gần
     //int eKeyPressCount = 0;
     //std::cout << player->getCurrentPosition().x << ' ' << player->getCurrentPosition().y;
+
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E) && !this->keyPressed)
         {
             currentItem++;
@@ -48,6 +52,7 @@ void Item::update()
             }
             this->keyPressed = true;
         }
+
     //if (sf::Event::KeyReleased && sf::Keyboard::E) {
     //    // Thiết lập lại biến khi phím "E" được nhãn
     //    this->keyPressed1 = false;

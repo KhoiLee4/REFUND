@@ -1,207 +1,109 @@
 #include "Menu.h"
 
-Menu::Menu(float width, float height)
+Menu::Menu()
 {
-	//cai dat font chu
-	if (!font.loadFromFile("PixelGameFont.ttf"))
-	{
-		std::cout << "No font is here";
-	}
+	window = new sf::RenderWindow(sf::VideoMode(screenWidth, screenHight), "Refund", sf::Style::Close | sf::Style::Titlebar);
+	window->setFramerateLimit(144);
 
-	//PLAY
-	mainMenu[0].setFont(font); // cai dat font chu
-	mainMenu[0].setFillColor(sf::Color::White); // mau chu
-	mainMenu[0].setString("Play"); // noi dung cua chu
-	mainMenu[0].setCharacterSize(70); // kich thuoc
-	mainMenu[0].setPosition(400, 200); // vi tri chu tren mang hinh
-
-	//OPTION
-	mainMenu[1].setFont(font);
-	mainMenu[1].setFillColor(sf::Color::White);
-	mainMenu[1].setString("Options");
-	mainMenu[1].setCharacterSize(70);
-	mainMenu[1].setPosition(400, 300);
-
-	//ABOUT
-	mainMenu[2].setFont(font);
-	mainMenu[2].setFillColor(sf::Color::White);
-	mainMenu[2].setString("About");
-	mainMenu[2].setCharacterSize(70);
-	mainMenu[2].setPosition(400, 400);
-
-	//EXIT
-	mainMenu[3].setFont(font);
-	mainMenu[3].setFillColor(sf::Color::White);
-	mainMenu[3].setString("Exit");
-	mainMenu[3].setCharacterSize(70);
-	mainMenu[3].setPosition(400, 500);
-
-	MainMenuSelected = -1;
 }
+
 Menu::~Menu()
 {
+}
 
-}
-// draw main menu
-void Menu::draw(sf::RenderWindow& window)
+void Menu::optionStart()
 {
-	for (int i = 0; i < Max_main_menu; i++)
+	std::cout << "start\n";
+	//window->close();
+	Game game;
+	while (game.getWindow().isOpen())
 	{
-		window.draw(mainMenu[i]);
-	}
-}
-// move up
-void Menu::MoveUp()
-{
-	if (MainMenuSelected - 1 >= 0)
-	{
-		mainMenu[MainMenuSelected].setFillColor(sf::Color::White);
-		MainMenuSelected--;
-		if (MainMenuSelected == -1)
-		{
-			MainMenuSelected = 2;
-		}
-		mainMenu[MainMenuSelected].setFillColor(sf::Color::Blue);
-	}
-}
-// move down
-void Menu::MoveDown()
-{
-	if (MainMenuSelected + 1 <= Max_main_menu)
-	{
-		mainMenu[MainMenuSelected].setFillColor(sf::Color::White);
-		MainMenuSelected++;
-		if (MainMenuSelected == 4)
-		{
-			MainMenuSelected = 0;
-		}
-		mainMenu[MainMenuSelected].setFillColor(sf::Color::Blue);
+		game.update();
+		game.render();
 	}
 }
 
-void Menu::RunMenu()
+void Menu::optionSetting()
 {
-	// make window
-	sf::RenderWindow menu(sf::VideoMode(960, 720), "Menu", sf::Style::Default);
-	Menu mainMenu(menu.getSize().x, menu.getSize().y);
+}
 
-	// set background
+void Menu::optionRecord()
+{
+}
+
+void Menu::runMenu()
+{
+	// tao backgruond
 	sf::RectangleShape background;
-	background.setSize(sf::Vector2f(960, 720));
-	sf::Texture mainTexture;
-	mainTexture.loadFromFile("cyberpunk-street.png");
-	background.setTexture(&mainTexture);
+	background.setSize(sf::Vector2f(screenWidth, screenHight));
+	sf::Texture backgroundTexture;
+	backgroundTexture.loadFromFile("Data/Textures/Background/h_background.jpg");
+	background.setTexture(&backgroundTexture);
 
-	// photo to the game 
-	// window play, option, about
-	////
+	// tao nut start
+	sf::Texture startTexture;
+	startTexture.loadFromFile("Data/Textures/Button/button_start.png");
+	sf::Sprite startButton(startTexture);
+	startButton.setPosition(screenWidth / 2 - 40, screenHight / 2 - 80);
 
+	// tao nut record
+	sf::Texture recordTexture;
+	recordTexture.loadFromFile("Data/Textures/Button/button_record.png");
+	sf::Sprite recordButton(recordTexture);
+	recordButton.setPosition(startButton.getPosition().x - (20 + recordTexture.getSize().x), startButton.getPosition().y + startTexture.getSize().y + 20);
 
-	////
-	// game loop
-	while (menu.isOpen())
-	{
-		sf::Event ev;
-		while (menu.pollEvent(ev))
-		{
-			if (ev.type == sf::Event::Closed)
-				menu.close();
-			if (ev.type == sf::Event::KeyReleased)
-			{
-				if (ev.key.code == sf::Keyboard::Up)
-				{
-					mainMenu.MoveUp();
-					break;
-				}
-				if (ev.key.code == sf::Keyboard::Down)
-				{
-					mainMenu.MoveDown();
-					break;
-				}
-				if (ev.key.code == sf::Keyboard::Return)
-				{
-					sf::RenderWindow PLAY(sf::VideoMode(960, 720), "game_play");
-					sf::RenderWindow OPTION(sf::VideoMode(960, 720), "game_option");
-					sf::RenderWindow ABOUT(sf::VideoMode(960, 720), "game_about");
+	// tao nut setting
+	sf::Texture settingTexture;
+	settingTexture.loadFromFile("Data/Textures/Button/button_setting.png");
+	sf::Sprite settingButton(settingTexture);
+	settingButton.setPosition(startButton.getPosition().x + startTexture.getSize().x + 20, startButton.getPosition().y + startTexture.getSize().y + 20);
 
-					int x = mainMenu.MainMenuPressed();
-					if (x == 0)
-					{
-						while (PLAY.isOpen())
-						{
-							sf::Event evplay;
-							while (PLAY.pollEvent(evplay))
-							{
-								if (evplay.type == sf::Event::Closed)
-									PLAY.close();
-								if (evplay.type == sf::Event::KeyPressed)
-								{
-									if (evplay.key.code == sf::Keyboard::Escape)
-										PLAY.close();
-								}
-							}
-							OPTION.close();
-							ABOUT.close();
-							PLAY.clear();
-							//PLAY.draw(Pbackgruond); // draw window play
-							PLAY.display();
-						}
+	//  tao nut exit
+	sf::Texture exitTexture;
+	exitTexture.loadFromFile("Data/Textures/Button/button_exit.png");
+	sf::Sprite exitButton(exitTexture);
+	exitButton.setPosition(screenWidth - 50, screenHight - 50);
+
+	while (window->isOpen()) {
+		sf::Event event;
+		while (window->pollEvent(event)) {
+			if (event.type == sf::Event::Closed) {
+				window->close();
+			}
+
+			if (event.type == sf::Event::MouseButtonPressed) {
+				if (event.mouseButton.button == sf::Mouse::Left) {
+					sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
+
+					if (startButton.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePosition))) {
+						optionStart();
 					}
-					if (x == 1)
-					{
-						while (OPTION.isOpen())
-						{
-							sf::Event evop;
-							while (OPTION.pollEvent(evop))
-							{
-								if (evop.type == sf::Event::Closed)
-									OPTION.close();
-								if (evop.type == sf::Event::KeyPressed)
-								{
-									if (evop.key.code == sf::Keyboard::Escape)
-										OPTION.close();
-								}
-							}
-							PLAY.close();
-							OPTION.clear();
-							//OPTION.draw(Obackgruond); // draw window option
-							ABOUT.close();
-							OPTION.display();
-						}
+
+					if (recordButton.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePosition))) {
+						optionRecord();
 					}
-					if (x == 2)
-					{
-						while (ABOUT.isOpen())
-						{
-							sf::Event evab;
-							while (ABOUT.pollEvent(evab))
-							{
-								if (evab.type == sf::Event::Closed)
-									ABOUT.close();
-								if (evab.type == sf::Event::KeyPressed)
-								{
-									if (evab.key.code == sf::Keyboard::Escape)
-										ABOUT.close();
-								}
-							}
-							PLAY.close();
-							OPTION.clear();
-							ABOUT.clear();
-							//ABOUT.draw(Abackgruond); // draw window about
-							ABOUT.display();
-						}
+
+					if (settingButton.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePosition))) {
+						optionSetting();
 					}
-					if (x == 3)
-						menu.close();
-					break;
+
+					if (exitButton.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePosition))) {
+						window->close();
+					}
 				}
 			}
 		}
-		menu.clear();
-		menu.draw(background);
-		mainMenu.draw(menu);
-		menu.display();
+
+		window->clear();
+		// ve background
+		window->draw(background);
+		// ve cac nut
+		window->draw(startButton);
+		window->draw(recordButton);
+		window->draw(settingButton);
+		window->draw(exitButton);
+
+		window->display();
 	}
 }
-
 

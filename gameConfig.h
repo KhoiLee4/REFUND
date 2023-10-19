@@ -1,4 +1,9 @@
 #pragma once
 // kich thuoc mang hinh
-#define screenWidth 1536
-#define screenHight 768
+#define screenWidth 800
+#define screenHight 600
+
+// font chu
+
+
+
