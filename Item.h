@@ -3,12 +3,7 @@
 class Item
 {
 private:
-    std::vector<sf::Texture> itemTextures;
-    sf::Sprite currentSprite;
-
     bool keyPressed = false; 
-    int currentItem = 0;
-
     //sf::Clock debounceTime;
     void initcurrentSprite();
     void initTexture();
@@ -17,8 +12,13 @@ public:
     Item();
     virtual ~Item();
 
+    std::vector<sf::Texture> itemTextures;
+    sf::Sprite currentSprite;
+    int currentItem = 0;
+
     //Functions
     sf::Vector2f getItemPosition();
+    void updateItem();
     void update();
     void render(sf::RenderTarget& target);
     //Functions

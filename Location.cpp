@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "Location.h"
 
 void Location::initItemTextures()
@@ -112,11 +112,7 @@ sf::Vector2f Location::getLocationPosition()
 
 void Location::updateItem()
 {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E) && !this->keyPressed)
-    {
-        eraseItem = true;
-        this->keyPressed = true;
-    }
+    this->eraseItem = false;
 }
 
 void Location::update()
@@ -125,7 +121,7 @@ void Location::update()
 
 void Location::renderItem(sf::RenderTarget& target)
 {
-    if (eraseItem == false) target.draw(this->itemSprite);
+    if (this->eraseItem == true) target.draw(this->itemSprite);
 }
 void Location::render(sf::RenderTarget& target)
 {

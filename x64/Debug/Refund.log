@@ -1,2 +1,8 @@
-﻿  Menu.cpp
+﻿  Game.cpp
+  Item.cpp
+  ItemPick.cpp
+  Location.cpp
+  Main.cpp
+  Menu.cpp
+  Generating Code...
   Refund.vcxproj -> C:\Users\ADMIN\Desktop\Refund\Refund\x64\Debug\Refund.exe

@@ -10,6 +10,8 @@ class Game
 private:
 	sf::RenderWindow window;
 	sf::Event ev;
+	bool keyE = true;
+	bool keyPressed = false;
 
 	Location* location;
 	ItemPick* itemPick;
@@ -28,8 +30,6 @@ public:
 	virtual ~Game();
 
 	//Functions 
-	
-	void updateNearTruck();
 	bool isNearObject(const sf::Vector2f& objectPosition, const sf::Vector2f& targetPosition, float thresholdDistance);
 	void updateLocation();
 	void updatePickSpritePosition();
