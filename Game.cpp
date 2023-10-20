@@ -55,41 +55,7 @@ void Game::updatePickSpritePosition()
 	pickY = this->player->getThiefPosition().y;
 	this->itemPick->pickSprite.setPosition(pickX, pickY - 1.0f);
 }
-//void Game::pressKeyE()
-//{
-//	float thresholdDistance = 20.0f; // Khoảng cách tối thiểu để xem là đã đến gần
-//	if (keyE == true)
-//	{
-//		if (isNearObject(this->player->getThiefPosition(), this->item->getItemPosition(), thresholdDistance))
-//		{
-//			this->item->updateItem();
-//			this->itemPick->updatePick();
-//			keyE = false;
-//		}
-//	}
-//	else if (keyE == false)
-//	{
-//		if (isNearObject(this->player->getThiefPosition(), this->location->getLocationPosition(), thresholdDistance))
-//		{
-//			this->location->updateItem();
-//			this->itemPick->updateRestore();
-//			keyE = true;
-//		}
-//	}
-//}
-//void Game::updateItemPick()
-//{
-//	this->itemPick->update();
-//}
-//void Game::updateNearTruck()
-//{
-//	//float thresholdDistance = 20.0f; // Khoảng cách tối thiểu để xem là đã đến gần
-//	//if (isNearObject(this->player->getThiefPosition(), this->item->getItemPosition(), thresholdDistance))
-//	//{
-//	//	this->item->updateItem();
-//	//	this->itemPick->update();
-//	//}
-//}
+
 bool Game::isNearObject(const sf::Vector2f& objectPosition, const sf::Vector2f& targetPosition, float thresholdDistance)
 {
 	float distance = std::sqrt((objectPosition.x - targetPosition.x) * (objectPosition.x - targetPosition.x) +
@@ -123,7 +89,7 @@ void Game::update()
 			this->window.close();
 		else if (this->ev.type == sf::Event::KeyPressed && this->ev.key.code == sf::Keyboard::E && this->keyPressed == false)
 		{
-			std::cout << "Phim E duoc nhan" << std::endl;
+			//std::cout << "Phim E duoc nhan" << std::endl;
 			if (this->keyE == true)
 			{
 				std::cout << "Phim E1 duoc nhan" << std::endl;
@@ -154,8 +120,6 @@ void Game::update()
 		}
 	}
 
-	//this->pressKeyE();
-	//this->updateNearTruck();
 	this->updateLocation();
 	this->updatePickSpritePosition();
 	//this->updateItemPick();
@@ -165,7 +129,7 @@ void Game::update()
 
 void Game::renderNearLocation()
 {
-	float thresholdDistance = 20.0f; // Khoảng cách tối thiểu để xem là đã đến gần
+	float thresholdDistance = 30.0f; // Khoảng cách tối thiểu để xem là đã đến gần
 	if (isNearObject(this->player->getThiefPosition(), this->location->getLocationPosition(), thresholdDistance))
 	{
 		this->location->renderItem(this->window);

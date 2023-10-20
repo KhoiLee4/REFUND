@@ -12,13 +12,18 @@ private:
 	sf::Event ev;
 	bool keyE = true;
 	bool keyPressed = false;
+	std::vector<sf::Texture> locationTextures;
+	std::vector<sf::Texture> itemTextures;
+	std::vector<sf::Sprite> locationSprite;
+	std::vector<sf::Sprite> itemSprite;
 
 	Location* location;
 	ItemPick* itemPick;
 	Item* item;
 	Player* player;
 
-	void initWindow();
+	void initWindow(); 
+	//void initLocationTextures();
 	void initLocation();
 	void initItemPick();
 	void initItem();
