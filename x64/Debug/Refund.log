@@ -1,5 +1,5 @@
 ﻿  Game.cpp
-  Location.cpp
-  Main.cpp
+  ItemPick.cpp
   Generating Code...
+C:\Users\ASUS\Desktop\Refund\Refund\Game.cpp(171): warning C4715: 'Game::getLocationPosition': not all control paths return a value
   Refund.vcxproj -> C:\Users\ASUS\Desktop\Refund\Refund\x64\Debug\Refund.exe

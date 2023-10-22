@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Location.h"
 #include "ItemPick.h"
 #include "Item.h"
 #include "Player.h"
@@ -17,14 +16,24 @@ private:
 	std::vector<sf::Sprite> locationSprite;
 	std::vector<sf::Sprite> itemSprite;
 
-	Location* location;
+	std::vector<bool> eraseItem;
+
+	//Location* location;
 	ItemPick* itemPick;
 	Item* item;
 	Player* player;
 
 	void initWindow(); 
-	//void initLocationTextures();
-	void initLocation();
+	void initEraseItem();
+	void initItemTextures();
+	void initItemSprite();
+	void initItemPosition();
+	void initItemLocation();
+	void initLocationTextures();
+	void initLocationSprite();
+	void initLocationPosition();
+	void initLocations();
+	//void initLocation();
 	void initItemPick();
 	void initItem();
 	void initPlayer();
@@ -35,15 +44,20 @@ public:
 	virtual ~Game();
 
 	//Functions 
+	sf::Vector2f getLocationPosition(int i);
+	void updateItemLocation(int i);
 	bool isNearObject(const sf::Vector2f& objectPosition, const sf::Vector2f& targetPosition, float thresholdDistance);
-	void updateLocation();
+	//void updateLocation();
 	void updatePickSpritePosition();
 	//void updateItemPick();
 	//void updateItem();
 	void updatePlayer();
 	void update();
+
+	void renderItemLocation(int i);
+	void renderLocations();
 	void renderNearLocation();
-	void renderLocation();
+	//void renderLocation();
 	void renderItemPick();
 	void renderItem();
 	void renderPlayer();

@@ -14,6 +14,10 @@ void Item::initTexture()
             std::cerr << "Failed to load item" << i << ".png" << std::endl;
         }
     }
+    sf::Texture texture;
+    if (texture.loadFromFile("Data/Textures/Items/emptyCar.jpg")) {
+        this->itemTextures.push_back(texture);
+    }
 }
 void Item::initcurrentSprite()
 {

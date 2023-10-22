@@ -1,27 +1,24 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "Game.h"
+#include "gameConfig.h"
 #include <iostream>
 
-#define Max_main_menu 4
 
 class Menu
 {
 private:
-	int MainMenuSelected; // vi tri lua chon
-	sf::Font font; // font chu
-	sf::Text mainMenu[Max_main_menu]; // chu tren menu
-
+	sf::RenderWindow* window;
 
 public:
-	Menu(float width, float height);
+	Menu();
 	~Menu();
 
-	void draw(sf::RenderWindow& window); // 
-	void MoveUp(); // di chuyen len 
-	void MoveDown(); // di chuyen xuong
-	void RunMenu();
-	int MainMenuPressed() { return MainMenuSelected; }
+	void optionStart();
+	void optionSetting();
+	void optionRecord();
+	void runMenu();
 
 };
 
