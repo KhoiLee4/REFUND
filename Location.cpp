@@ -3,7 +3,7 @@
 
 void Location::initItemTextures()
 {
-    /*for (int i = 1; i <= 6; i++)
+    for (int i = 1; i <= 6; i++)
     {
         sf::Texture texture;
 
@@ -13,32 +13,36 @@ void Location::initItemTextures()
         else {
             std::cerr << "Failed to load item-2" << i << ".png" << std::endl;
         }
-    }*/
-    this->itemTextures.loadFromFile("Data/Textures/Items/item1.png");
+    }
+    //this->itemTextures.loadFromFile("Data/Textures/Items/item1.png");
 }
 
 void Location::initItemSprite()
 {
-   /* for (int i = 0; i < 6; i++)
+   for (int i = 0; i < 6; i++)
     {
-        if(i < this->itemTextures.size() && i < this->itemSprite.size())
-            this->itemSprite[i].setTexture(this->itemTextures[i]);
-    }*/
-    this->itemSprite.setTexture(this->itemTextures);
+       sf::Sprite sprite;
+       if (i < this->itemTextures.size())
+       {
+           sprite.setTexture(this->itemTextures[i]);
+           this->itemSprite.push_back(sprite);
+       }
+    }
+    //this->itemSprite.setTexture(this->itemTextures);
 }
 
 void Location::initItemPosition()
 {
-    /*if (this->itemSprite.size() == 6)
+    if (this->itemSprite.size() == 6)
     {
         this->itemSprite[0].setPosition(250, 350 - 1);
         this->itemSprite[1].setPosition(300, 400 - 1);
         this->itemSprite[2].setPosition(350, 450 - 1);
         this->itemSprite[3].setPosition(400, 500 - 1);
         this->itemSprite[4].setPosition(450, 500 - 1);
-        this->itemSprite[5].setPosition(50, 55 - 1);
-    }*/
-    this->itemSprite.setPosition(300, 400 - 20);
+        this->itemSprite[5].setPosition(500, 550 - 1);
+    }
+    //this->itemSprite.setPosition(300, 400 - 20);
 }
 
 void Location::initItem()
@@ -50,7 +54,7 @@ void Location::initItem()
 
 void Location::initLocationTextures()
 {
-    /*for (int i = 1; i <= 6; i++)
+    for (int i = 1; i <= 6; i++)
     {
         sf::Texture texture;
 
@@ -60,32 +64,44 @@ void Location::initLocationTextures()
         else {
             std::cerr << "Failed to load location" << i << ".png" << std::endl;
         }
-    }*/
-    this->locationTextures.loadFromFile("Data/Textures/Locations/location1.png");
+    }
+    //this->locationTextures.loadFromFile("Data/Textures/Locations/location1.png");
 }
 
 void Location::initLocationSprite()
 {
-    /*for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 6; i++)
     {
-        if (i < this->locationTextures.size() && i < this->locationSprite.size())
-            this->locationSprite[i].setTexture(this->locationTextures[i]);
-    }*/
-    this->locationSprite.setTexture(this->locationTextures);
+        sf::Sprite sprite;
+        if (i < this->locationTextures.size())
+        {
+            sprite.setTexture(this->locationTextures[i]);
+            this->locationSprite.push_back(sprite);
+        }
+    }
+    //this->locationSprite.setTexture(this->locationTextures);
 }
 
 void Location::initLocationPosition()
 {
-    /*if (this->locationSprite.size() == 6)
+    if (this->locationSprite.size() == 6)
     {
         this->locationSprite[0].setPosition(250, 350);
         this->locationSprite[1].setPosition(300, 400);
         this->locationSprite[2].setPosition(350, 450);
         this->locationSprite[3].setPosition(400, 500);
         this->locationSprite[4].setPosition(450, 500);
-        this->locationSprite[5].setPosition(50, 55);
-    }*/
-    this->locationSprite.setPosition(300, 400);
+        this->locationSprite[5].setPosition(500, 550);
+    }
+    //this->locationSprite.setPosition(300, 400);
+}
+
+void Location::initEraseItem()
+{
+    for (int i = 0; i < 6; i++)
+    {
+        eraseItem.push_back(true);
+    }
 }
 
 void Location::initLocation()
@@ -99,39 +115,32 @@ Location::Location()
 {
     this->initItem();
     this->initLocation();
+    this->initEraseItem();
 }
 
 Location::~Location()
 {
 }
 
-sf::Vector2f Location::getLocationPosition()
+sf::Vector2f Location::getLocationPosition(int i)
 {
-    return this->locationSprite.getPosition();
+    return this->locationSprite[i].getPosition();
 }
 
-void Location::updateItem()
+void Location::updateItem(int i)
 {
-    this->eraseItem = false;
+    this->eraseItem[i] = false;
 }
 
 void Location::update()
 {
 }
 
-void Location::renderItem(sf::RenderTarget& target)
+void Location::renderItem(sf::RenderTarget& target, int i)
 {
-    if (this->eraseItem == true) target.draw(this->itemSprite);
+    if (this->eraseItem[i] == true) target.draw(this->itemSprite[i]);
 }
-void Location::render(sf::RenderTarget& target)
+void Location::render(sf::RenderTarget& target, int i)
 {
-    /*for (int i = 0; i < 6; i++)
-    {
-        target.draw(this->itemSprite[i]);
-    }
-    for (int i = 0; i < 6; i++)
-    {
-        target.draw(this->locationSprite[i]);
-    }*/
-    target.draw(this->locationSprite);
+    target.draw(this->locationSprite[i]);
 }

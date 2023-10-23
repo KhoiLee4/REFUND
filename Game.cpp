@@ -9,116 +9,121 @@ void Game::initWindow()
 	this->window.setFramerateLimit(144);
 }
 
-void Game::initEraseItem()
+//void Game::initEraseItem()
+//{
+//	for (int i = 0; i < 6; i++)
+//	{
+//		this->eraseItem.push_back(true);
+//	}
+//}
+//
+//void Game::initItemTextures()
+//{
+//	for (int i = 1; i <= 6; i++)
+//	{
+//		sf::Texture texture;
+//
+//		if (texture.loadFromFile("Data/Textures/Items/item" + std::to_string(i) + ".png")) 
+//			this->itemTextures.push_back(texture);
+//		else {
+//			std::cerr << "Failed to load item-2" << i << ".png" << std::endl;
+//		}
+//	}
+//	/*std::cout << "item co " << itemTextures.size();
+//	std::cout << '\n';*/
+//}
+//
+//void Game::initItemSprite()
+//{
+//	for (int i = 0; i < 6; i++)
+//	{
+//		sf::Sprite sprite;
+//		if (i < this->itemTextures.size())
+//		{
+//			sprite.setTexture(this->itemTextures[i]);
+//			this->itemSprite.push_back(sprite);
+//		}
+//		else
+//		{
+//			std::cout << "Khong the set Sprite cho location item thu " << i;
+//			std::cout << '\n';
+//		}
+//	}
+//}
+//
+//void Game::initItemPosition()
+//{
+//	if (this->itemSprite.size() == 6)
+//	{
+//		this->itemSprite[0].setPosition(250, 350 - 20);
+//		this->itemSprite[1].setPosition(300, 400 - 20);
+//		this->itemSprite[2].setPosition(350, 450 - 20);
+//		this->itemSprite[3].setPosition(400, 500 - 20);
+//		this->itemSprite[4].setPosition(450, 500 - 20);
+//		this->itemSprite[5].setPosition(500, 550 - 20);
+//	}
+//}
+//
+//void Game::initItemLocation()
+//{
+//	this->initItemTextures();
+//	this->initItemSprite();
+//	this->initItemPosition();
+//}
+//
+//void Game::initLocationTextures()
+//{
+//	for (int i = 1; i <= 6; i++)
+//	{
+//		sf::Texture texture;
+//
+//		if (texture.loadFromFile("Data/Textures/Locations/location" + std::to_string(i) + ".png")) {
+//			this->locationTextures.push_back(texture);
+//		}
+//		else {
+//			std::cerr << "Failed to load location" << i << ".png" << std::endl;
+//		}
+//	}
+//}
+//
+//void Game::initLocationSprite()
+//{
+//	for (int i = 0; i < 6; i++)
+//	{
+//		sf::Sprite sprite;
+//		if (i < this->locationTextures.size())
+//		{
+//			sprite.setTexture(this->locationTextures[i]);
+//			this->locationSprite.push_back(sprite);
+//		}
+//			
+//		else std::cout << "Khong the set Sprite cho location thu " << i << '\n';
+//	}
+//}
+//
+//void Game::initLocationPosition()
+//{
+//	if (this->locationSprite.size() == 6)
+//	{
+//		this->locationSprite[0].setPosition(250, 350);
+//		this->locationSprite[1].setPosition(300, 400);
+//		this->locationSprite[2].setPosition(350, 450);
+//		this->locationSprite[3].setPosition(400, 500);
+//		this->locationSprite[4].setPosition(450, 500);
+//		this->locationSprite[5].setPosition(500, 550);
+//	}
+//}
+//
+//void Game::initLocations()
+//{
+//	this->initLocationTextures();
+//	this->initLocationSprite();
+//	this->initLocationPosition();
+//}
+
+void Game::initLocation()
 {
-	for (int i = 0; i < 6; i++)
-	{
-		this->eraseItem.push_back(true);
-	}
-}
-
-void Game::initItemTextures()
-{
-	for (int i = 1; i <= 6; i++)
-	{
-		sf::Texture texture;
-
-		if (texture.loadFromFile("Data/Textures/Items/item" + std::to_string(i) + ".png")) 
-			this->itemTextures.push_back(texture);
-		else {
-			std::cerr << "Failed to load item-2" << i << ".png" << std::endl;
-		}
-	}
-	/*std::cout << "item co " << itemTextures.size();
-	std::cout << '\n';*/
-}
-
-void Game::initItemSprite()
-{
-	for (int i = 0; i < 6; i++)
-	{
-		sf::Sprite sprite;
-		if (i < this->itemTextures.size())
-		{
-			sprite.setTexture(this->itemTextures[i]);
-			this->itemSprite.push_back(sprite);
-		}
-		else
-		{
-			std::cout << "Khong the set Sprite cho location item thu " << i;
-			std::cout << '\n';
-		}
-	}
-}
-
-void Game::initItemPosition()
-{
-	if (this->itemSprite.size() == 6)
-	{
-		this->itemSprite[0].setPosition(250, 350 - 20);
-		this->itemSprite[1].setPosition(300, 400 - 20);
-		this->itemSprite[2].setPosition(350, 450 - 20);
-		this->itemSprite[3].setPosition(400, 500 - 20);
-		this->itemSprite[4].setPosition(450, 500 - 20);
-		this->itemSprite[5].setPosition(500, 550 - 20);
-	}
-}
-
-void Game::initItemLocation()
-{
-	this->initItemTextures();
-	this->initItemSprite();
-	this->initItemPosition();
-}
-
-void Game::initLocationTextures()
-{
-	for (int i = 1; i <= 6; i++)
-	{
-		sf::Texture texture;
-
-		if (texture.loadFromFile("Data/Textures/Locations/location" + std::to_string(i) + ".png")) {
-			this->locationTextures.push_back(texture);
-		}
-		else {
-			std::cerr << "Failed to load location" << i << ".png" << std::endl;
-		}
-	}
-}
-
-void Game::initLocationSprite()
-{
-	for (int i = 0; i < 6; i++)
-	{
-		sf::Sprite sprite;
-		if (i < this->locationTextures.size())
-		{
-			sprite.setTexture(this->locationTextures[i]);
-			this->locationSprite.push_back(sprite);
-		}
-			
-		else std::cout << "Khong the set Sprite cho location thu " << i << '\n';
-	}
-}
-
-void Game::initLocationPosition()
-{
-	if (this->locationSprite.size() == 6)
-	{
-		this->locationSprite[0].setPosition(250, 350);
-		this->locationSprite[1].setPosition(300, 400);
-		this->locationSprite[2].setPosition(350, 450);
-		this->locationSprite[3].setPosition(400, 500);
-		this->locationSprite[4].setPosition(450, 500);
-		this->locationSprite[5].setPosition(500, 550);
-	}
-}
-
-void Game::initLocations()
-{
-	this->initLocationTextures();
-	this->initLocationSprite();
-	this->initLocationPosition();
+	this->location = new Location();
 }
 
 void Game::initItemPick()
@@ -139,15 +144,16 @@ void Game::initPlayer()
 Game::Game()
 {
 	this->initWindow();
-	this->initEraseItem();
-	this->initItemLocation();
-	this->initLocations();
+	//this->initEraseItem();
+	//this->initItemLocation();
+	this->initLocation();
 	this->initItemPick();
 	this->initItem();
 	this->initPlayer();
 }
 Game::~Game()
 {
+	delete this->location;
 	delete this->itemPick;
 	delete this->item;
 	delete this->player;
@@ -161,18 +167,18 @@ void Game::updatePickSpritePosition()
 	this->itemPick->pickSprite.setPosition(pickX, pickY - 1.0f);
 }
 
-sf::Vector2f Game::getLocationPosition(int i)
-{
-	if (i < locationSprite.size()) return this->locationSprite[i].getPosition();
-	else
-	{
-		std::cout << "Khong lay duoc vi tri cua location";
-	}
-}
+//sf::Vector2f Game::getLocationPosition(int i)
+//{
+//	if (i < this->location->locationSprite.size()) return this->location->locationSprite[i].getPosition();
+//	else
+//	{
+//		std::cout << "Khong lay duoc vi tri cua location";
+//	}
+//}
 
-void Game::updateItemLocation(int i)
+void Game::updateLocation(int i)
 {
-	this->eraseItem[i] = false;
+	this->location->updateItem(i);
 }
 
 bool Game::isNearObject(const sf::Vector2f& objectPosition, const sf::Vector2f& targetPosition, float thresholdDistance)
@@ -216,12 +222,12 @@ void Game::update()
 				std::cout << "Phim E2 duoc nhan" << std::endl;
 				for (int i = 0; i < 6; i++)
 				{
-					if (isNearObject(this->player->getThiefPosition(), this->getLocationPosition(i), thresholdDistance))
+					if (isNearObject(this->player->getThiefPosition(), this->location->getLocationPosition(i), thresholdDistance))
 					{
-							this->updateItemLocation(i);
+							this->updateLocation(i);
 							this->itemPick->updateRestore();
 							this->keyE = true;
-							this->eraseItem[i] = true;
+							this->location->eraseItem[i] = true;
 					}
 					break;
 				}
@@ -243,15 +249,16 @@ void Game::renderItemLocation(int i)
 {
 	if (i >= 6) std::cout << "Loi khong render ra item location thu" << i;
 	else
-		if (this->eraseItem[i] == true) this->window.draw(this->itemSprite[i]);
+		if (this->location->eraseItem[i] == true) 
+			this->location->renderItem(this->window, i);
 }
 
-void Game::renderLocations()
+void Game::renderLocation()
 {
 	for (int i = 0; i < 6; i++)
 	{
-		if (i < locationSprite.size())
-			this->window.draw(this->locationSprite[i]);
+		if (i < this->location->locationSprite.size())
+			this->location->render(this->window, i);
 		else std::cout << "Khong the render duoc location thu " << i;
 	}
 }
@@ -261,11 +268,15 @@ void Game::renderNearLocation()
 	float thresholdDistance = 30.0f; // Khoảng cách tối thiểu để xem là đã đến gần
 	for (int i = 0; i < 6; i++)
 	{
-		if (isNearObject(this->player->getThiefPosition(), this->getLocationPosition(i), thresholdDistance))
+		if (isNearObject(this->player->getThiefPosition(), this->location->getLocationPosition(i), thresholdDistance))
 		{
 			this->renderItemLocation(i);
 		}
 	}
+}
+
+void Game::renderLocation()
+{
 }
 
 void Game::renderItemPick()
@@ -288,8 +299,9 @@ void Game::render()
 	this->window.clear();
 
 	//Render game
+	//this->renderItemLocation();
 	this->renderNearLocation();
-	this->renderLocations();
+	this->renderLocation();
 	this->renderItemPick();
 	this->renderItem();
 	this->renderPlayer();

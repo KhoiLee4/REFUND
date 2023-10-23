@@ -1,5 +1,6 @@
 ﻿  Game.cpp
-  ItemPick.cpp
+C:\Users\ASUS\Desktop\Refund\Refund\Game.cpp(278,12): error C2084: function 'void Game::renderLocation(void)' already has a body
+C:\Users\ASUS\Desktop\Refund\Refund\Game.cpp(256,12): message : see previous definition of 'renderLocation'
+  Main.cpp
+  Menu.cpp
   Generating Code...
-C:\Users\ASUS\Desktop\Refund\Refund\Game.cpp(171): warning C4715: 'Game::getLocationPosition': not all control paths return a value
-  Refund.vcxproj -> C:\Users\ASUS\Desktop\Refund\Refund\x64\Debug\Refund.exe
