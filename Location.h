@@ -4,9 +4,6 @@ class Location
 {
 private:
 	std::vector<sf::Texture> locationTextures;
-	std::vector<sf::Texture> itemTextures;
-	
-
 	/*sf::Texture itemTextures;
 	sf::Texture locationTextures;
 	sf::Sprite itemSprite;
@@ -29,7 +26,8 @@ private:
 public:
 	Location();
 	virtual ~Location();
-
+	
+	std::vector<sf::Texture> itemTextures;
 	std::vector<sf::Sprite> locationSprite;
 	std::vector<sf::Sprite> itemSprite;
 	std::vector<bool> eraseItem;

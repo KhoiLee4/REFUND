@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Done.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemPick.cpp" />
@@ -143,6 +144,7 @@
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Done.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="gameConfig.h" />
     <ClInclude Include="Item.h" />

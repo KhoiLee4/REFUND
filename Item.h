@@ -12,6 +12,7 @@ public:
     Item();
     virtual ~Item();
 
+    //std::map<int, sf::Texture> itemTextures;
     std::vector<sf::Texture> itemTextures;
     sf::Sprite currentSprite;
     int currentItem = 0;

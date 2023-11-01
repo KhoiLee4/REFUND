@@ -1,5 +1,6 @@
 ﻿#include "stdafx.h"
 #include "Game.h"
+#include <random>
 
 void Game::initWindow()
 {
@@ -8,6 +9,21 @@ void Game::initWindow()
 	//Set frame rate
 	this->window.setFramerateLimit(144);
 }
+
+void Game::initDone()
+{
+	this->done = new Done();
+}
+
+//void Game::initDone()
+//{
+//	for (int i = 0; i < 6; i++)
+//	{
+//		this->done[i] = false;
+//	}
+//	this->doneTexture.loadFromFile("Data/Textures/Done/done.jpg");
+//	this->doneSprite.setTexture(this->doneTexture);
+//}
 
 void Game::initLocation()
 {
@@ -32,6 +48,7 @@ void Game::initPlayer()
 Game::Game()
 {
 	this->initWindow();
+	this->initDone();
 	this->initLocation();
 	this->initItemPick();
 	this->initItem();
@@ -39,6 +56,7 @@ Game::Game()
 }
 Game::~Game()
 {
+	delete this->done;
 	delete this->location;
 	delete this->itemPick;
 	delete this->item;
@@ -52,6 +70,23 @@ void Game::updatePickSpritePosition()
 	pickY = this->player->getThiefPosition().y;
 	this->itemPick->pickSprite.setPosition(pickX, pickY - 1.0f);
 }
+
+//bool Game::checkDone()
+//{
+//	for (int i = 0; i < 6; i++)
+//	{
+//		if (done[i] == false) return false;
+//	}
+//	return true;
+//}
+
+//void Game::shuffle(std::vector<sf::Texture>& texture)
+//{
+//	std::random_device rd;  // Tạo một thiết bị ngẫu nhiên
+//	std::mt19937 g(rd());   // Tạo một generator ngẫu nhiên
+//
+//	std::shuffle(texture.begin(), texture.end()-1, g);  // Sử dụng std::shuffle để xáo trộn vector
+//}
 
 void Game::updateLocation(int i)
 {
@@ -73,8 +108,11 @@ void Game::updatePlayer()
 
 void Game::update()
 {
+	/*this->shuffle(this->item->itemTextures);
+	this->shuffle(this->location->itemTextures);*/
 	//Polling widow events
-	float thresholdDistance = 30.0f; // Khoảng cách tối thiểu để xem là đã đến gần
+	float thresholdDistance = 15.0f; // Khoảng cách tối thiểu để xem là đã đến gần
+	int i = 0;
 	while (this->window.pollEvent(this->ev))
 	{
 		if (this->ev.type == sf::Event::Closed)
@@ -84,7 +122,7 @@ void Game::update()
 		else if (this->ev.type == sf::Event::KeyPressed && this->ev.key.code == sf::Keyboard::E && this->keyPressed == false)
 		{
 			std::cout << "Phim E duoc nhan" << std::endl;
-			if (this->keyE == true)
+			if (this->keyE == true && !this->done->check())
 			{
 				std::cout << "Phim E1 duoc nhan" << std::endl;
 				if (isNearObject(this->player->getThiefPosition(), this->item->getItemPosition(), thresholdDistance))
@@ -97,16 +135,23 @@ void Game::update()
 			else if (this->keyE == false)
 			{
 				std::cout << "Phim E2 duoc nhan" << std::endl;
-				for (int i = 0; i < 6; i++)
+				
+				if(!this->done->check() && i<6)
 				{
-					if (isNearObject(this->player->getThiefPosition(), this->location->getLocationPosition(i), thresholdDistance))
-					{
-							this->updateLocation(i);
-							this->itemPick->updateRestore();
-							this->keyE = true;
-							this->location->eraseItem[i] = true;
-					}
-					break;
+						/*if (this->itemPick->pickItem == i)
+						{*/
+							if (isNearObject(this->player->getThiefPosition(), this->location->getLocationPosition(i), thresholdDistance))
+							{
+								std::cout << "Tra do ne" << std::endl;
+								std::cout << "i = " << i << std::endl;
+								this->updateLocation(i);
+								this->itemPick->updateRestore();
+								this->keyE = true;
+								this->location->eraseItem[i] = true;
+								this->done->updateCheck(i);
+								i++;
+							}
+						/*}*/
 				}
 			}
 			this->keyPressed = true;
@@ -124,12 +169,9 @@ void Game::update()
 
 void Game::renderItemLocation(int i)
 {
-	if (i >= 6) std::cout << "Loi khong render ra item location thu" << i;
-	else
-		if (this->location->eraseItem[i] == true) 
+	if (this->location->eraseItem[i] == true)
 			this->location->renderItem(this->window, i);
 }
-
 void Game::renderLocation()
 {
 	for (int i = 0; i < 6; i++)
@@ -142,18 +184,19 @@ void Game::renderLocation()
 
 void Game::renderNearLocation()
 {
-	float thresholdDistance = 30.0f; // Khoảng cách tối thiểu để xem là đã đến gần
+	float thresholdDistance = 15.0f; // Khoảng cách tối thiểu để xem là đã đến gần
 	for (int i = 0; i < 6; i++)
 	{
-		if (isNearObject(this->player->getThiefPosition(), this->location->getLocationPosition(i), thresholdDistance))
+		if (this->done->getDoneCheck(i) == false)
 		{
-			this->renderItemLocation(i);
+			if (isNearObject(this->player->getThiefPosition(), this->location->getLocationPosition(i), thresholdDistance))
+				this->renderItemLocation(i);
+		}
+		else
+		{
+			this->done->render(this->window, i);
 		}
 	}
-}
-
-void Game::renderLocation()
-{
 }
 
 void Game::renderItemPick()

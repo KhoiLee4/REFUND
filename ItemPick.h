@@ -13,7 +13,7 @@ public:
     Item* item;
     //std::vector<sf::Texture> itemTextures;
     sf::Sprite pickSprite;
-    int pickItem = 0;
+    int pickItem = -1;
 
     //Functions
     void updateRestore();

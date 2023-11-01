@@ -32,6 +32,7 @@ void ItemPick::updatePick()
     if (pickItem < this->item->itemTextures.size())
     {
         this->pickSprite = this->item->currentSprite;
+        //this->pickItem++;
         this->eraseItem = true;
     }
 }

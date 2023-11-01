@@ -14,6 +14,7 @@ Menu::~Menu()
 
 void Menu::optionStart()
 {
+	//srand(static_cast<unsigned>(time(0)));
 	std::cout << "start\n";
 	//window->close();
 	Game game;
