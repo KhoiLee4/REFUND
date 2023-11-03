@@ -1,5 +1,55 @@
 ﻿  Game.cpp
+  Item.cpp
   ItemPick.cpp
+  Main.cpp
+  Menu.cpp
+  Player.cpp
+C:\Users\ADMIN\Desktop\Refund\Refund\Player.cpp(98,30): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Users\ADMIN\Desktop\Refund\Refund\Player.cpp(107,29): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Users\ADMIN\Desktop\Refund\Refund\Player.cpp(108,31): warning C4244: '+=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Users\ADMIN\Desktop\Refund\Refund\Player.cpp(120,29): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Users\ADMIN\Desktop\Refund\Refund\Player.cpp(121,31): warning C4244: '+=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Users\ADMIN\Desktop\Refund\Refund\Player.cpp(133,29): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Users\ADMIN\Desktop\Refund\Refund\Player.cpp(134,31): warning C4244: '+=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Users\ADMIN\Desktop\Refund\Refund\Player.cpp(146,29): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Users\ADMIN\Desktop\Refund\Refund\Player.cpp(147,31): warning C4244: '+=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+  stdafx.cpp
   Generating Code...
-C:\Users\ASUS\Desktop\Refund\Refund\Game.cpp(171): warning C4715: 'Game::getLocationPosition': not all control paths return a value
-  Refund.vcxproj -> C:\Users\ASUS\Desktop\Refund\Refund\x64\Debug\Refund.exe
+C:\Users\ADMIN\Desktop\Refund\Refund\Game.cpp(171): warning C4715: 'Game::getLocationPosition': not all control paths return a value
+  Refund.vcxproj -> C:\Users\ADMIN\Desktop\Refund\Refund\x64\Debug\Refund.exe
