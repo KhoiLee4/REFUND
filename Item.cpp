@@ -1,5 +1,7 @@
 ﻿#include "stdafx.h"
 #include "Item.h"
+#include <random>
+#include <algorithm>
 
 void Item::initTexture()
 {
@@ -14,11 +16,16 @@ void Item::initTexture()
             std::cerr << "Failed to load item" << i << ".png" << std::endl;
         }
     }
+    // Random Item
+    std::default_random_engine engine(static_cast<unsigned int>(std::time(0)));
+    std::shuffle(itemTextures.begin(), itemTextures.end(), engine);
+
     sf::Texture texture;
     if (texture.loadFromFile("Data/Textures/Items/emptyCar.jpg")) {
         this->itemTextures.push_back(texture);
     }
 }
+
 void Item::initcurrentSprite()
 {
     this->currentSprite.setPosition(100, 200);
