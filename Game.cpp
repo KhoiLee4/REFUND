@@ -112,7 +112,6 @@ void Game::update()
 	this->shuffle(this->location->itemTextures);*/
 	//Polling widow events
 	float thresholdDistance = 15.0f; // Khoảng cách tối thiểu để xem là đã đến gần
-	int i = 0;
 	while (this->window.pollEvent(this->ev))
 	{
 		if (this->ev.type == sf::Event::Closed)
@@ -121,7 +120,7 @@ void Game::update()
 			this->window.close();
 		else if (this->ev.type == sf::Event::KeyPressed && this->ev.key.code == sf::Keyboard::E && this->keyPressed == false)
 		{
-			std::cout << "Phim E duoc nhan" << std::endl;
+			//std::cout << "Phim E duoc nhan" << std::endl;
 			if (this->keyE == true && !this->done->check())
 			{
 				std::cout << "Phim E1 duoc nhan" << std::endl;
@@ -132,26 +131,24 @@ void Game::update()
 					this->keyE = false;
 				}
 			}
-			else if (this->keyE == false)
+			else if (this->keyE == false && !this->done->check())
 			{
 				std::cout << "Phim E2 duoc nhan" << std::endl;
-				
-				if(!this->done->check() && i<6)
+				for (int i = 0; i < 6; i++)
 				{
-						/*if (this->itemPick->pickItem == i)
-						{*/
-							if (isNearObject(this->player->getThiefPosition(), this->location->getLocationPosition(i), thresholdDistance))
-							{
-								std::cout << "Tra do ne" << std::endl;
-								std::cout << "i = " << i << std::endl;
-								this->updateLocation(i);
-								this->itemPick->updateRestore();
-								this->keyE = true;
-								this->location->eraseItem[i] = true;
-								this->done->updateCheck(i);
-								i++;
-							}
-						/*}*/
+					if (itemPick->pickItem == i)
+					{
+						std::cout << "Tra do ne" << std::endl;
+						if (isNearObject(this->player->getThiefPosition(), this->location->getLocationPosition(i), thresholdDistance))
+						{
+							std::cout << "i = " << i << std::endl;
+							this->updateLocation(i);
+							this->itemPick->updateRestore();
+							this->keyE = true;
+							this->location->eraseItem[i] = true;
+							this->done->updateCheck(i);
+						}
+					}
 				}
 			}
 			this->keyPressed = true;

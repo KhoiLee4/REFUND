@@ -2,18 +2,17 @@
 class ItemPick
 {
 private:
+    std::vector<sf::Texture> itemTextures;
     bool keyPressed = false, eraseItem = true;
     //sf::Clock debounceTime;
-    //void initTexture();
+    void initTexture();
     //void initSprite();
 public:
     ItemPick();
     virtual ~ItemPick();
 
-    Item* item;
-    //std::vector<sf::Texture> itemTextures;
     sf::Sprite pickSprite;
-    int pickItem = -1;
+    int pickItem = 0;
 
     //Functions
     void updateRestore();

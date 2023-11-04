@@ -1,13 +1,2 @@
 ﻿  Game.cpp
-C:\Users\ASUS\Desktop\Refund\Refund\ItemPick.h(13,9): error C2143: syntax error: missing ';' before '*'
-C:\Users\ASUS\Desktop\Refund\Refund\ItemPick.h(13,9): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\ASUS\Desktop\Refund\Refund\ItemPick.h(13,15): error C2238: unexpected token(s) preceding ';'
-  Main.cpp
-C:\Users\ASUS\Desktop\Refund\Refund\ItemPick.h(13,9): error C2143: syntax error: missing ';' before '*'
-C:\Users\ASUS\Desktop\Refund\Refund\ItemPick.h(13,9): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\ASUS\Desktop\Refund\Refund\ItemPick.h(13,15): error C2238: unexpected token(s) preceding ';'
-  Menu.cpp
-C:\Users\ASUS\Desktop\Refund\Refund\ItemPick.h(13,9): error C2143: syntax error: missing ';' before '*'
-C:\Users\ASUS\Desktop\Refund\Refund\ItemPick.h(13,9): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\ASUS\Desktop\Refund\Refund\ItemPick.h(13,15): error C2238: unexpected token(s) preceding ';'
-  Generating Code...
+  Refund.vcxproj -> C:\Users\ASUS\Desktop\Refund\Refund\x64\Debug\Refund.exe

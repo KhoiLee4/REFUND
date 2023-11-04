@@ -33,7 +33,7 @@ void Done::initCheck()
 {
     for (int i = 0; i < 6; i++)
     {
-        this->doneCheck[i] = false;
+        doneCheck.push_back(false);
     }
 }
 
