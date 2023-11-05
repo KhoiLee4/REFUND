@@ -135,11 +135,13 @@
   <ItemGroup>
     <ClCompile Include="Done.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Host.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemPick.cpp" />
     <ClCompile Include="Location.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Noise.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
@@ -147,10 +149,12 @@
     <ClInclude Include="Done.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="gameConfig.h" />
+    <ClInclude Include="Host.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemPick.h" />
     <ClInclude Include="Location.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="Noise.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

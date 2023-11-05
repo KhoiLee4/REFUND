@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Noise.h"
+#include "Host.h"
 #include "Done.h"
 #include "Location.h"
 #include "ItemPick.h"
@@ -11,12 +13,16 @@ class Game
 private:
 	sf::RenderWindow window;
 	sf::Event ev;
+
+	bool checkGameOver = false;
 	bool keyE = true;
 	bool keyPressed = false;
+	int count = 0;
 	//std::vector<bool> done;
 	//sf::Texture doneTexture;
 	//sf::Sprite doneSprite;
-
+	Noise* noise;
+	Host* host;
 	Done* done;
 	Location* location;
 	ItemPick* itemPick;
@@ -24,6 +30,8 @@ private:
 	Player* player;
 
 	void initWindow(); 
+	void initNoise();
+	void initHost();
 	void initDone();
 	void initLocation();
 	void initItemPick();
@@ -36,7 +44,11 @@ public:
 	virtual ~Game();
 
 	//Functions 
-	void updateDone();
+	void gameOver();
+	void increaseNoise();
+	void updateNoise();
+	void updateHost();
+	//void updateDone();
 	//void shuffle(std::vector<sf::Texture>& texture);
 	void updateLocation(int i);
 	bool isNearObject(const sf::Vector2f& objectPosition, const sf::Vector2f& targetPosition, float thresholdDistance);
@@ -44,6 +56,8 @@ public:
 	void updatePlayer();
 	void update();
 
+	void renderNoise();
+	void renderHost();
 	void renderItemLocation(int i);
 	void renderNearLocation();
 	void renderLocation();

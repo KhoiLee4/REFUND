@@ -41,12 +41,12 @@ void Done::initPosition()
 {
     if (this->doneSprite.size() == 6)
     {
-        this->doneSprite[0].setPosition(250, 350 - 1);
-        this->doneSprite[1].setPosition(300, 400 - 1);
-        this->doneSprite[2].setPosition(350, 450 - 1);
-        this->doneSprite[3].setPosition(400, 500 - 1);
-        this->doneSprite[4].setPosition(450, 500 - 1);
-        this->doneSprite[5].setPosition(500, 550 - 1);
+        this->doneSprite[0].setPosition(250, 350 - 25);
+        this->doneSprite[1].setPosition(300, 400 - 25);
+        this->doneSprite[2].setPosition(350, 450 - 25);
+        this->doneSprite[3].setPosition(400, 500 - 25);
+        this->doneSprite[4].setPosition(450, 500 - 25);
+        this->doneSprite[5].setPosition(500, 550 - 25);
     }
 }
 

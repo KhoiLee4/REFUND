@@ -10,6 +10,16 @@ void Game::initWindow()
 	this->window.setFramerateLimit(144);
 }
 
+void Game::initNoise()
+{
+	this->noise = new Noise();
+}
+
+void Game::initHost()
+{
+	this->host = new Host();
+}
+
 void Game::initDone()
 {
 	this->done = new Done();
@@ -48,6 +58,8 @@ void Game::initPlayer()
 Game::Game()
 {
 	this->initWindow();
+	this->initNoise();
+	this->initHost();
 	this->initDone();
 	this->initLocation();
 	this->initItemPick();
@@ -56,11 +68,42 @@ Game::Game()
 }
 Game::~Game()
 {
+	delete this->noise;
+	delete this->host;
 	delete this->done;
 	delete this->location;
 	delete this->itemPick;
 	delete this->item;
 	delete this->player;
+}
+
+void Game::gameOver()
+{
+	if (this->noise->checkNoiseMax() == true)
+	{
+		this->checkGameOver = true;
+		this->host->updateVariables();
+	}
+		
+}
+
+void Game::increaseNoise()
+{
+	if (player->getanimState() != IDLE)
+		if(player->getCheckSlowly() == true)
+			this->noise->setNoiseIndex(0.01f);
+		else
+			this->noise->setNoiseIndex(0.1f);
+}
+
+void Game::updateNoise()
+{
+	this->noise->update();
+}
+
+void Game::updateHost()
+{
+	this->host->update();
 }
 
 void Game::updatePickSpritePosition()
@@ -111,57 +154,70 @@ void Game::update()
 	/*this->shuffle(this->item->itemTextures);
 	this->shuffle(this->location->itemTextures);*/
 	//Polling widow events
-	float thresholdDistance = 15.0f; // Khoảng cách tối thiểu để xem là đã đến gần
+	float thresholdDistance = 30.0f; // Khoảng cách tối thiểu để xem là đã đến gần
 	while (this->window.pollEvent(this->ev))
 	{
 		if (this->ev.type == sf::Event::Closed)
 			this->window.close();
 		else if (this->ev.type == sf::Event::KeyPressed && this->ev.key.code == sf::Keyboard::Escape)
 			this->window.close();
-		else if (this->ev.type == sf::Event::KeyPressed && this->ev.key.code == sf::Keyboard::E && this->keyPressed == false)
+		else if (!this->checkGameOver)
 		{
-			//std::cout << "Phim E duoc nhan" << std::endl;
-			if (this->keyE == true && !this->done->check())
+			if (this->ev.type == sf::Event::KeyPressed && this->ev.key.code == sf::Keyboard::E && this->keyPressed == false)
 			{
-				std::cout << "Phim E1 duoc nhan" << std::endl;
-				if (isNearObject(this->player->getThiefPosition(), this->item->getItemPosition(), thresholdDistance))
+				//std::cout << "Phim E duoc nhan" << std::endl;
+				if (this->keyE == true && !this->done->check())
 				{
-					this->item->updateItem();
-					this->itemPick->updatePick();
-					this->keyE = false;
-				}
-			}
-			else if (this->keyE == false && !this->done->check())
-			{
-				std::cout << "Phim E2 duoc nhan" << std::endl;
-				for (int i = 0; i < 6; i++)
-				{
-					if (itemPick->pickItem == i)
+					std::cout << "Phim E1 duoc nhan" << std::endl;
+					if (isNearObject(this->player->getThiefPosition(), this->item->getItemPosition(), thresholdDistance))
 					{
-						std::cout << "Tra do ne" << std::endl;
-						if (isNearObject(this->player->getThiefPosition(), this->location->getLocationPosition(i), thresholdDistance))
-						{
-							std::cout << "i = " << i << std::endl;
-							this->updateLocation(i);
-							this->itemPick->updateRestore();
-							this->keyE = true;
-							this->location->eraseItem[i] = true;
-							this->done->updateCheck(i);
-						}
+						this->item->updateItem();
+						this->itemPick->updatePick();
+						this->keyE = false;
 					}
 				}
+				else if (this->keyE == false && !this->done->check())
+				{
+					std::cout << "Phim E2 duoc nhan" << std::endl;
+					if (isNearObject(this->player->getThiefPosition(), this->location->getLocationPosition(count), thresholdDistance))
+					{
+						std::cout << "count = " << count << std::endl;
+						this->updateLocation(count);
+						this->itemPick->updateRestore();
+						this->keyE = true;
+						this->location->eraseItem[count] = true;
+						this->done->updateCheck(count);
+						this->count++;
+					}
+				}
+				this->keyPressed = true;
 			}
-			this->keyPressed = true;
-		}
-		else if (this->ev.type == sf::Event::KeyReleased && this->ev.key.code == sf::Keyboard::E) 
-		{
-			std::cout << "Phim E duoc tha ra" << std::endl;
-			this->keyPressed = false;
+			else if (this->ev.type == sf::Event::KeyReleased && this->ev.key.code == sf::Keyboard::E)
+			{
+				std::cout << "Phim E duoc tha ra" << std::endl;
+				this->keyPressed = false;
+			}
 		}
 	}
+	if (!this->checkGameOver)
+	{
+		this->increaseNoise();
+		this->updateNoise();
+		this->updatePickSpritePosition();
+		this->updatePlayer();
+	}
+	this->gameOver();
+	this->updateHost();
+}
 
-	this->updatePickSpritePosition();
-	this->updatePlayer();
+void Game::renderNoise()
+{
+	this->noise->render(this->window);
+}
+
+void Game::renderHost()
+{
+	this->host->render(this->window);
 }
 
 void Game::renderItemLocation(int i)
@@ -181,7 +237,7 @@ void Game::renderLocation()
 
 void Game::renderNearLocation()
 {
-	float thresholdDistance = 15.0f; // Khoảng cách tối thiểu để xem là đã đến gần
+	float thresholdDistance = 30.0f; // Khoảng cách tối thiểu để xem là đã đến gần
 	for (int i = 0; i < 6; i++)
 	{
 		if (this->done->getDoneCheck(i) == false)
@@ -216,6 +272,8 @@ void Game::render()
 	this->window.clear();
 
 	//Render game
+	this->renderNoise();
+	this->renderHost();
 	this->renderNearLocation();
 	this->renderLocation();
 	this->renderItemPick();

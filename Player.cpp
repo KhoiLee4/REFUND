@@ -52,6 +52,16 @@ Player::~Player()
 //	}
 //}
 
+bool Player::getCheckSlowly()
+{
+	return this->checkSlowly;
+}
+
+short Player::getanimState()
+{
+	return this->animState;
+}
+
 sf::Vector2f Player::getThiefPosition()
 {
 	return this->thiefSprite.getPosition();
@@ -63,30 +73,39 @@ void Player::updateMovement()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::RShift))
 	{
 		moveSpeed = 0.5f;
+		this->checkSlowly = true;
 	}
-		this->animState = PLAYER_ANIMATION_STATES::IDLE;
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) //Left
-		{
-			this->thiefSprite.move(-moveSpeed, 0.f);
-			this->animState = PLAYER_ANIMATION_STATES::MOVING_LEFT;
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) //Right
-		{
-			this->thiefSprite.move(moveSpeed, 0.f);
-			this->animState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
-		}
+	else
+	{
+		this->checkSlowly = false;
+	}
 
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) //Top
-		{
-			this->thiefSprite.move(0.f, -moveSpeed);
-			this->animState = PLAYER_ANIMATION_STATES::MOVING_UP;
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) //Down
-		{
-			this->thiefSprite.move(0.f, moveSpeed);
-			this->animState = PLAYER_ANIMATION_STATES::MOVING_DOWN;
-		}
-		else this->animState = PLAYER_ANIMATION_STATES::IDLE;
+	this->animState = PLAYER_ANIMATION_STATES::IDLE;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) //Left
+	{
+		this->thiefSprite.move(-moveSpeed, 0.f);
+		this->animState = PLAYER_ANIMATION_STATES::MOVING_LEFT;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) //Right
+	{
+		this->thiefSprite.move(moveSpeed, 0.f);
+		this->animState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
+	}
+
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) //Top
+	{
+		this->thiefSprite.move(0.f, -moveSpeed);
+		this->animState = PLAYER_ANIMATION_STATES::MOVING_UP;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) //Down
+	{
+		this->thiefSprite.move(0.f, moveSpeed);
+		this->animState = PLAYER_ANIMATION_STATES::MOVING_DOWN;
+	}
+	else
+	{
+		this->animState = PLAYER_ANIMATION_STATES::IDLE;
+	}
 }
 
 void Player::updateAnimation()

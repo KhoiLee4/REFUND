@@ -35,12 +35,12 @@ void Location::initItemPosition()
 {
     if (this->itemSprite.size() == 6)
     {
-        this->itemSprite[0].setPosition(250, 350 - 1);
-        this->itemSprite[1].setPosition(300, 400 - 1);
-        this->itemSprite[2].setPosition(350, 450 - 1);
-        this->itemSprite[3].setPosition(400, 500 - 1);
-        this->itemSprite[4].setPosition(450, 500 - 1);
-        this->itemSprite[5].setPosition(500, 550 - 1);
+        this->itemSprite[0].setPosition(250, 350 - 20);
+        this->itemSprite[1].setPosition(300, 400 - 20);
+        this->itemSprite[2].setPosition(350, 450 - 20);
+        this->itemSprite[3].setPosition(400, 500 - 20);
+        this->itemSprite[4].setPosition(450, 500 - 20);
+        this->itemSprite[5].setPosition(500, 550 - 20);
     }
     //this->itemSprite.setPosition(300, 400 - 20);
 }
