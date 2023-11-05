@@ -14,6 +14,7 @@ private:
 	sf::RenderWindow window;
 	sf::Event ev;
 
+	bool checkGameWinner = false;
 	bool checkGameOver = false;
 	bool keyE = true;
 	bool keyPressed = false;
@@ -44,6 +45,7 @@ public:
 	virtual ~Game();
 
 	//Functions 
+	void gameWinner();
 	void gameOver();
 	void increaseNoise();
 	void updateNoise();

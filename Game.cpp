@@ -77,6 +77,14 @@ Game::~Game()
 	delete this->player;
 }
 
+void Game::gameWinner()
+{
+	if (this->done->check())
+	{
+		this->checkGameWinner = true;
+	}
+}
+
 void Game::gameOver()
 {
 	if (this->noise->checkNoiseMax() == true)
@@ -84,7 +92,6 @@ void Game::gameOver()
 		this->checkGameOver = true;
 		this->host->updateVariables();
 	}
-		
 }
 
 void Game::increaseNoise()
@@ -161,7 +168,7 @@ void Game::update()
 			this->window.close();
 		else if (this->ev.type == sf::Event::KeyPressed && this->ev.key.code == sf::Keyboard::Escape)
 			this->window.close();
-		else if (!this->checkGameOver)
+		else if (!this->checkGameOver && !this->checkGameWinner)
 		{
 			if (this->ev.type == sf::Event::KeyPressed && this->ev.key.code == sf::Keyboard::E && this->keyPressed == false)
 			{
@@ -199,13 +206,14 @@ void Game::update()
 			}
 		}
 	}
-	if (!this->checkGameOver)
+	if (!this->checkGameOver && !this->checkGameWinner)
 	{
 		this->increaseNoise();
 		this->updateNoise();
 		this->updatePickSpritePosition();
 		this->updatePlayer();
 	}
+	this->gameWinner();
 	this->gameOver();
 	this->updateHost();
 }
