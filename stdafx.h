@@ -1,8 +1,12 @@
+#pragma once
+
 #include<cstdlib>
 #include<ctime>
 #include<iostream>
 #include<time.h>
 #include<vector>
+#include<math.h>
+
 
 //SFMl
 #include<SFML/System.hpp>

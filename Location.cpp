@@ -1,20 +1,20 @@
-﻿#include "stdafx.h"
-#include "Location.h"
+﻿#include "Location.h"
 
 void Location::initItemTextures()
 {
+    // lay hinh tu data vao
     for (int i = 1; i <= 6; i++)
     {
         sf::Texture texture;
-
-        if (texture.loadFromFile("Data/Textures/Items/item" + std::to_string(i) + ".png")) {
-            this->itemTextures.push_back(texture);
+        if (texture.loadFromFile("Data/Textures/Items/item" + std::to_string(i) + ".png"))
+        {
+            this->itemTextures.push_back(texture); // them vao cuoi (bat dau tu 0)
         }
-        else {
-            std::cerr << "Failed to load item-2" << i << ".png" << std::endl;
+        else
+        {
+            std::cerr << "Failed to load item" << i << ".png" << std::endl;
         }
     }
-    //this->itemTextures.loadFromFile("Data/Textures/Items/item1.png");
 }
 
 void Location::initItemSprite()
@@ -28,7 +28,6 @@ void Location::initItemSprite()
            this->itemSprite.push_back(sprite);
        }
     }
-    //this->itemSprite.setTexture(this->itemTextures);
 }
 
 void Location::initItemPosition()
@@ -42,7 +41,6 @@ void Location::initItemPosition()
         this->itemSprite[4].setPosition(450, 500 - 20);
         this->itemSprite[5].setPosition(500, 550 - 20);
     }
-    //this->itemSprite.setPosition(300, 400 - 20);
 }
 
 void Location::initItem()
@@ -96,19 +94,19 @@ void Location::initLocationPosition()
     //this->locationSprite.setPosition(300, 400);
 }
 
+void Location::initLocation()
+{
+    this->initLocationTextures();
+    this->initLocationSprite();
+    this->initLocationPosition();
+}
+
 void Location::initEraseItem()
 {
     for (int i = 0; i < 6; i++)
     {
         eraseItem.push_back(true);
     }
-}
-
-void Location::initLocation()
-{
-    this->initLocationTextures();
-    this->initLocationSprite();
-    this->initLocationPosition();
 }
 
 Location::Location()
@@ -127,6 +125,16 @@ sf::Vector2f Location::getLocationPosition(int i)
     return this->locationSprite[i].getPosition();
 }
 
+bool Location::getEraseItem(int i)
+{
+    return eraseItem[i];
+}
+
+std::vector<sf::Sprite> Location::getLocationSprite()
+{
+    return locationSprite;
+}
+
 void Location::updateItem(int i)
 {
     this->eraseItem[i] = false;
@@ -140,6 +148,7 @@ void Location::renderItem(sf::RenderTarget& target, int i)
 {
     if (this->eraseItem[i] == true) target.draw(this->itemSprite[i]);
 }
+
 void Location::render(sf::RenderTarget& target, int i)
 {
     target.draw(this->locationSprite[i]);

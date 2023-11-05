@@ -1,6 +1,16 @@
 #pragma once
 
-enum PLAYER_ANIMATION_STATES {IDLE = 0, MOVING_LEFT, MOVING_RIGHT, MOVING_UP, MOVING_DOWN};
+#include "stdafx.h"
+
+
+enum PLAYER_ANIMATION_STATES {
+	IDLE = 0, 
+	MOVING_LEFT, 
+	MOVING_RIGHT, 
+	MOVING_UP, 
+	MOVING_DOWN
+};
+
 class Player
 {
 private:
@@ -18,6 +28,7 @@ private:
 	void initTexture();
 	void initSprite();
 	void initAnimations();
+
 public:
 	Player();
 	virtual ~Player();

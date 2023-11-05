@@ -7,66 +7,83 @@
 #include "ItemPick.h"
 #include "Item.h"
 #include "Player.h"
+#include "stdafx.h"
+#include "gameConfig.h"
+#include <random>
+
+/*
+## Class Game ##
+- class nay thuc hien qua trinh choi game bao gom:
+	+ map 
+	+ logic game
+	+ tinh diem
+	+ ...
+
+*/
 
 class Game
 {
 private:
-	sf::RenderWindow window;
-	sf::Event ev;
-
-	bool checkGameWinner = false;
-	bool checkGameOver = false;
-	bool keyE = true;
-	bool keyPressed = false;
-	int count = 0;
+	sf::RenderWindow window; // cua so cuar game
+	sf::Event ev; // bien bat su kien
+	float thresholdDistance; // khoang cach toi thieu de xem la da den gan
+	bool checkGameWinner; // kiem tra da thang hay chua
+	bool checkGameOver; // kiem tra da thua hay chua
+	bool keyE; // kiem tra da nhan E chua
+	bool keyPressed; // kiem tra da nhan phim hay chua
+	int count;
 	//std::vector<bool> done;
 	//sf::Texture doneTexture;
 	//sf::Sprite doneSprite;
-	Noise* noise;
-	Host* host;
-	Done* done;
-	Location* location;
-	ItemPick* itemPick;
-	Item* item;
-	Player* player;
+	Noise *noise; // tieng on
+	Host *host; // chu nha
+	Done *done; // hoan thanh tra do
+	Location *location; // do taij vi tri tra
+	ItemPick *itemPick; // do tren tay nhan vat
+	Item *item; // do tai vi tri ban dau
+	Player *player; // nhan vat
 
-	void initWindow(); 
-	void initNoise();
-	void initHost();
-	void initDone();
-	void initLocation();
-	void initItemPick();
-	void initItem();
-	void initPlayer();
+	void initWindow(); // khoi tao cua so
+	void initNoise(); // khoi tao tieng on
+	void initHost(); // khoi tao chu nha
+	void initDone(); // khoi tao bien hoan thanh tra do
+	void initLocation(); // kho taoj do tai vi tri tra
+	void initItemPick(); // khoi tao do tren tay nhan vat
+	void initItem(); // khoi tao do tai vi tri ban dau
+	void initPlayer(); // khoi tao nhan vat
+
 public:
-	//Functions
-
-	Game();
+	Game(); 
 	virtual ~Game();
 
 	//Functions 
-	void gameWinner();
-	void gameOver();
-	void increaseNoise();
-	void updateNoise();
-	void updateHost();
+	void gameWinner(); // kiem tra thang
+	void gameOver(); // kiem tra thua
+	void increaseNoise(); // tao tieng on
+	bool isNearObject(const sf::Vector2f& objectPosition, const sf::Vector2f& targetPosition); // kiem tra gan xa cua nhan vat voi vi tri do
+	
 	//void updateDone();
 	//void shuffle(std::vector<sf::Texture>& texture);
-	void updateLocation(int i);
-	bool isNearObject(const sf::Vector2f& objectPosition, const sf::Vector2f& targetPosition, float thresholdDistance);
-	void updatePickSpritePosition();
-	void updatePlayer();
+	void updateNoise(); // cap nhat tieng on
+	void updateHost(); // cap nhat chu nha
+	void updateLocation(int i); // cap nhat do tai vi tri tra
+	void updatePickSpritePosition(); // cap nhat vi tri do tren tay nhan vat
+	void updatePlayer(); // cap nhat nha vat
 	void update();
 
-	void renderNoise();
-	void renderHost();
-	void renderItemLocation(int i);
-	void renderNearLocation();
-	void renderLocation();
-	void renderItemPick();
-	void renderItem();
-	void renderPlayer();
-	void render();
+	void renderNoise(); // ve thanh tieng on
+	void renderHost(); // ve chu nha
+	void renderItemLocation(int i); // ve do tai vi tri tra
+	void renderNearLocation(); // hien do tai vi tri tra
+	void renderLocation(); // ve vi tri tra do
+	void renderItemPick(); // ve do vat tren tay nhan vat
+	void renderItem(); // ve do tren xe tai
+	void renderPlayer(); // ve nhan vat
+	void render(); // ve cua so game
+
 	const sf::RenderWindow& getWindow() const;
+
+	void runGame(); // chay cua so game
+
 };
 

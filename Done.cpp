@@ -1,17 +1,18 @@
-#include "stdafx.h"
 #include "Done.h"
 
 void Done::initTexture()
 {
     for (int i = 0; i < 6; i++)
     {
-        sf::Texture texture;
+        sf::Texture texture; // tao doi tuong luu anh
 
-        if (texture.loadFromFile("Data/Textures/Done/done.jpg")) {
+        if (texture.loadFromFile("Data/Textures/Done/done.jpg"))
+        {
             this->doneTexture.push_back(texture);
         }
-        else {
-            std::cerr << "Failed to load done" << i << ".jpg" << std::endl;
+        else
+        {
+            std::cerr << "Failed to load done " << i << ".jpg" << std::endl;
         }
     }
 }
