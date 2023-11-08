@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 ﻿  Record.cpp
 C:\Users\ASUS\Desktop\Refund\Refund\Record.cpp(135,53): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\ASUS\Desktop\Refund\Refund\Record.cpp(173,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\ASUS\Desktop\Refund\Refund\Record.cpp(188,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Refund.vcxproj -> C:\Users\ASUS\Desktop\Refund\Refund\x64\Debug\Refund.exe
+=======
+﻿  Game.cpp
+  Map.cpp
+  Generating Code...
+  Refund.vcxproj -> C:\Users\ADMIN\Desktop\Refund\Refund\x64\Debug\Refund.exe
+>>>>>>> 8d0e111a771486daa65c6ce2e858fbdb59715299
