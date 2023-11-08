@@ -37,23 +37,23 @@ bool Map::checkFrame()
 	// xet tren truc Ox
 	if (-mapSprite.getPosition().x + screenWidth > mapSprite.getGlobalBounds().width)
 	{
-		mapSprite.move(-mapSprite.getPosition().x + screenWidth - mapSprite.getGlobalBounds().width, 0.f);
+		//mapSprite.move(-mapSprite.getPosition().x + screenWidth - mapSprite.getGlobalBounds().width, 0.f);
 		return true;
 	}
 	if (mapSprite.getPosition().x > 0)
 	{
-		mapSprite.move(-mapSprite.getPosition().x, 0.f);
+		//mapSprite.move(-mapSprite.getPosition().x, 0.f);
 		return true;
 	}
 	// xet tren truc Oy
 	if (-mapSprite.getPosition().y + screenWidth > mapSprite.getGlobalBounds().height)
 	{
-		mapSprite.move(0.f, -mapSprite.getPosition().y + screenWidth - mapSprite.getGlobalBounds().height);
+		//mapSprite.move(0.f, -mapSprite.getPosition().y + screenWidth - mapSprite.getGlobalBounds().height);
 		return true;
 	}
 	if (mapSprite.getPosition().y > 0)
 	{
-		mapSprite.move(0.f, -mapSprite.getPosition().y);
+		//mapSprite.move(0.f, -mapSprite.getPosition().y);
 		return true;
 	}
 	// truong hop map chua ra khoi khung hinh

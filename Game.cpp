@@ -169,7 +169,28 @@ void Game::move(float moveSpeed)
 
 void Game::remove(float moveSpeed)
 {
+	if (player->getanimState() == UP)
+	{
+		moveBackGround(0.f, -moveSpeed);
+	}
 
+	// truong hop nhan vat di xuong
+	else if (player->getanimState() == DOWN)
+	{
+		moveBackGround(0.f, moveSpeed);
+	}
+
+	// truong hop nnhan vat di qua trai
+	else if (player->getanimState() == LEFT)
+	{
+		moveBackGround(-moveSpeed, 0.f);
+	}
+
+	// truong hop nhan vat di qua phai
+	else if (player->getanimState() == RIGHT)
+	{
+		moveBackGround(moveSpeed, 0.f);
+	}
 }
 
 void Game::moveBackGround(float x, float y)
@@ -237,6 +258,10 @@ void Game::checkRangePlayer(float moveSpeed)
 			//return true;
 		}
 		//else flag = true;
+	}
+	else
+	{
+		remove(moveSpeed);
 	}
 	//if (flag == true)
 	//{
