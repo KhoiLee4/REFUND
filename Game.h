@@ -1,5 +1,7 @@
 #pragma once
 
+#include <fstream>
+#include <string.h>
 #include "Noise.h"
 #include "Host.h"
 #include "Done.h"
@@ -28,6 +30,10 @@ private:
 	sf::RenderWindow window; // cua so cuar game
 	sf::Event ev; // bien bat su kien
 	sf::View view;
+	std::ofstream outFile;
+	std::string name;
+	sf::Clock recordTime;
+	float elapsedTime; // luu thoi gian ky luc
 	float thresholdDistance; // khoang cach toi thieu de xem la da den gan
 	bool checkGameWinner; // kiem tra da thang hay chua
 	bool checkGameOver; // kiem tra da thua hay chua
@@ -48,6 +54,7 @@ private:
 
 	void initWindow(); // khoi tao cua so
 	void initView();
+	void initRecordTime(); // khoi tao thoi gian luu ky luc
 	void initNoise(); // khoi tao tieng on
 	void initHost(); // khoi tao chu nha
 	void initDone(); // khoi tao bien hoan thanh tra do
@@ -74,6 +81,7 @@ public:
 	void remove(float moveSpeed);
 	void checkRangePlayer(float moveSpeed); // kiem tra vi tri cua nha vat
 
+	void updateRecordTime(); // cap nhat ky luc
 	void updateNoise(); // cap nhat tieng on
 	void updateHost(); // cap nhat chu nha
 	void updateLocation(int i); // cap nhat do tai vi tri tra

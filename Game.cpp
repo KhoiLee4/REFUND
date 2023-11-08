@@ -45,6 +45,11 @@ void Game::initView()
 	window.setView(view);
 }
 
+void Game::initRecordTime()
+{
+	this->recordTime.restart();
+}
+
 void Game::initItemPick()
 {
 	this->itemPick = new ItemPick();
@@ -104,7 +109,6 @@ void Game::gameWinner()
 	{
 		this->checkGameWinner = true; // xac nhan thang
 	}
-
 }
 
 void Game::gameOver()
@@ -272,6 +276,18 @@ void Game::checkRangePlayer(float moveSpeed)
 	//return false;
 }
 
+
+void Game::updateRecordTime()
+{
+	std::getline(std::cin, name);
+	outFile.open("Record.txt");
+	outFile << name << std::endl;
+	
+	this->elapsedTime = recordTime.getElapsedTime().asSeconds(); // lay thoi gian ky luc
+	outFile << elapsedTime << std::endl;
+
+	outFile.close();
+}
 
 /* Cac ham de cap nhat */
 void Game::updateNoise()
@@ -529,6 +545,7 @@ const sf::RenderWindow & Game::getWindow() const
 
 void Game::runGame()
 {
+	this->initRecordTime();
 	// thoiwf bat dau
 	while (window.isOpen())
 	{

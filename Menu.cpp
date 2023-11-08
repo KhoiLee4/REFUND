@@ -28,6 +28,11 @@ void Menu::optionSetting()
 
 void Menu::optionRecord()
 {
+	std::cout << "start record\n"; // kiem tra luong chay
+	window->close();
+	// chay vao game
+	Record record;
+	record.runRecord();
 }
 
 void Menu::runMenu()
