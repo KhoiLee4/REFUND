@@ -1,5 +1,6 @@
 #pragma once
 
+#include "gameConfig.h"
 #include "stdafx.h"
 
 /*
@@ -31,6 +32,7 @@ public:
     bool getDoneCheck(int i); // tra ve bien doneCheck
     bool check(); // kiem tra da done het chua (tra do hoan thanh chua)
     void updateCheck(int i); // cap nhat bien doneCheck
+    void moveDone(float x, float y);
     void update();
     void render(sf::RenderTarget& target, int i); // ve doneSprite[i]
 

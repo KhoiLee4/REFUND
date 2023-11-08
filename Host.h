@@ -1,5 +1,6 @@
 #pragma once
 
+#include "gameConfig.h"
 #include "stdafx.h"
 
 enum HOST_ANIMATION_STATES {SLEEP, WAKEUP};
@@ -33,6 +34,8 @@ public:
 
 	//Functions
 	sf::Vector2f getHostPosition(); // tra ve vi tri cua chu nha
+	void moveHost(float x, float y);
+	
 	void updateVariables(); // cap nhat trang thai cua chu nha (thuc day : WAKEUP)
 	void updateAnimation(); // cap nhat chuyen dong cua chu nha
 	void update(); // cap nhat thay doi cua chu nha

@@ -1,5 +1,6 @@
 #pragma once
 
+// C++
 #include<cstdlib>
 #include<ctime>
 #include<iostream>
@@ -8,7 +9,7 @@
 #include<math.h>
 
 
-//SFMl
+// SFMl
 #include<SFML/System.hpp>
 #include<SFML/Graphics.hpp>
 #include<SFML/Audio.hpp>

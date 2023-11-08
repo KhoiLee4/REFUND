@@ -1,7 +1,9 @@
 #pragma once
 
+#include "gameConfig.h"
 #include "stdafx.h"
-#include "Item.h"
+
+//#include "Item.h"
 
 /*
 ## Class ItemPick ##

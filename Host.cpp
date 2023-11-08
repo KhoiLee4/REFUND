@@ -19,8 +19,8 @@ void Host::initSprite()
 	this->hostSprite.setTexture(this->textureSheet); // gan hinh anh
 	this->currentFrame = sf::IntRect(0, 0, 84.8, 87); // cai dat kich thuoc hinh cat
 	this->hostSprite.setTextureRect(this->currentFrame); // cat hinh
-	//this->hostSprite.setScale(1.5f, 1.5f); //Increase sprite size
-	this->hostSprite.setPosition(150, 75); // cai dat vi tri cho chu nha
+	this->hostSprite.setScale(1.5f, 1.5f); //Increase sprite size
+	this->hostSprite.setPosition(hostX, hostY); // cai dat vi tri cho chu nha
 }	
 
 void Host::initAnimations()
@@ -43,6 +43,11 @@ Host::~Host()
 sf::Vector2f Host::getHostPosition()
 {
 	return hostSprite.getPosition();
+}
+
+void Host::moveHost(float x, float y)
+{
+	hostSprite.move(x, y);
 }
 
 void Host::updateVariables()

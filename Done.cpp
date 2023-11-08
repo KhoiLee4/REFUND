@@ -42,12 +42,12 @@ void Done::initPosition()
 {
     if (this->doneSprite.size() == 6)
     {
-        this->doneSprite[0].setPosition(250, 350 - 25);
-        this->doneSprite[1].setPosition(300, 400 - 25);
-        this->doneSprite[2].setPosition(350, 450 - 25);
-        this->doneSprite[3].setPosition(400, 500 - 25);
-        this->doneSprite[4].setPosition(450, 500 - 25);
-        this->doneSprite[5].setPosition(500, 550 - 25);
+        this->doneSprite[0].setPosition(doneX_01, doneY_01);
+        this->doneSprite[1].setPosition(doneX_02, doneY_02);
+        this->doneSprite[2].setPosition(doneX_03, doneY_03);
+        this->doneSprite[3].setPosition(doneX_04, doneY_04);
+        this->doneSprite[4].setPosition(doneX_05, doneY_05);
+        this->doneSprite[5].setPosition(doneX_06, doneY_06);
     }
 }
 
@@ -85,6 +85,14 @@ bool Done::check()
 void Done::updateCheck(int i)
 {
     this->doneCheck[i] = true;
+}
+
+void Done::moveDone(float x, float y)
+{
+    for (int i = 0; i < 6; i++)
+    {
+        doneSprite[i].move(x, y);
+    }
 }
 
 void Done::update()

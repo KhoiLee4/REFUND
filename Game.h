@@ -7,6 +7,7 @@
 #include "ItemPick.h"
 #include "Item.h"
 #include "Player.h"
+#include "Map.h"
 #include "stdafx.h"
 #include "gameConfig.h"
 #include <random>
@@ -26,6 +27,7 @@ class Game
 private:
 	sf::RenderWindow window; // cua so cuar game
 	sf::Event ev; // bien bat su kien
+	sf::View view;
 	float thresholdDistance; // khoang cach toi thieu de xem la da den gan
 	bool checkGameWinner; // kiem tra da thang hay chua
 	bool checkGameOver; // kiem tra da thua hay chua
@@ -42,8 +44,10 @@ private:
 	ItemPick *itemPick; // do tren tay nhan vat
 	Item *item; // do tai vi tri ban dau
 	Player *player; // nhan vat
+	Map* map;
 
 	void initWindow(); // khoi tao cua so
+	void initView();
 	void initNoise(); // khoi tao tieng on
 	void initHost(); // khoi tao chu nha
 	void initDone(); // khoi tao bien hoan thanh tra do
@@ -51,6 +55,7 @@ private:
 	void initItemPick(); // khoi tao do tren tay nhan vat
 	void initItem(); // khoi tao do tai vi tri ban dau
 	void initPlayer(); // khoi tao nhan vat
+	void initMap();
 
 public:
 	Game(); 
@@ -64,11 +69,17 @@ public:
 	
 	//void updateDone();
 	//void shuffle(std::vector<sf::Texture>& texture);
+	void moveBackGround(float x, float y);
+	void move(float moveSpeed);
+	void remove(float moveSpeed);
+	void checkRangePlayer(float moveSpeed); // kiem tra vi tri cua nha vat
+
 	void updateNoise(); // cap nhat tieng on
 	void updateHost(); // cap nhat chu nha
 	void updateLocation(int i); // cap nhat do tai vi tri tra
 	void updatePickSpritePosition(); // cap nhat vi tri do tren tay nhan vat
 	void updatePlayer(); // cap nhat nha vat
+	void updateMap();
 	void update();
 
 	void renderNoise(); // ve thanh tieng on
@@ -79,6 +90,7 @@ public:
 	void renderItemPick(); // ve do vat tren tay nhan vat
 	void renderItem(); // ve do tren xe tai
 	void renderPlayer(); // ve nhan vat
+	void renderMap();
 	void render(); // ve cua so game
 
 	const sf::RenderWindow& getWindow() const;

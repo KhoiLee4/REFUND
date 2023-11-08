@@ -1,6 +1,8 @@
 #pragma once
 
+#include "gameConfig.h"
 #include "stdafx.h"
+
 #include <random>
 
 /*
@@ -17,6 +19,8 @@ class Item
 private:
     std::vector<sf::Texture> itemTextures; // doi tuong luu anh
     sf::Sprite currentSprite; // mon do in ra mang hinh
+    std::vector<sf::Texture> carTextures; // doi tuong luu anh
+    sf::Sprite carSprite; // mon do in ra mang hinh
     int currentItem; // vi tri mon do hien tai
     bool keyPressed; 
 
@@ -32,6 +36,8 @@ public:
     //std::map<int, sf::Texture> itemTextures;
     //Functions
     sf::Vector2f getItemPosition(); // tra ve vi tri mon do tren xe tai
+    void moveItem(float x, float y);
+    
     void updateItem(); // cap nhat lai do tren xe tai
     void update();
     void render(sf::RenderTarget& target); // ve do tren xe tai

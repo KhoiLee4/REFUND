@@ -34,12 +34,12 @@ void Location::initItemPosition()
 {
     if (this->itemSprite.size() == 6)
     {
-        this->itemSprite[0].setPosition(250, 350 - 20);
-        this->itemSprite[1].setPosition(300, 400 - 20);
-        this->itemSprite[2].setPosition(350, 450 - 20);
-        this->itemSprite[3].setPosition(400, 500 - 20);
-        this->itemSprite[4].setPosition(450, 500 - 20);
-        this->itemSprite[5].setPosition(500, 550 - 20);
+        this->itemSprite[0].setPosition(itemLocationX_01, itemLocationY_01);
+        this->itemSprite[1].setPosition(itemLocationX_02, itemLocationY_02);
+        this->itemSprite[2].setPosition(itemLocationX_03, itemLocationY_03);
+        this->itemSprite[3].setPosition(itemLocationX_04, itemLocationY_04);
+        this->itemSprite[4].setPosition(itemLocationX_05, itemLocationY_05);
+        this->itemSprite[5].setPosition(itemLocationX_06, itemLocationY_06);
     }
 }
 
@@ -133,6 +133,15 @@ bool Location::getEraseItem(int i)
 std::vector<sf::Sprite> Location::getLocationSprite()
 {
     return locationSprite;
+}
+
+void Location::moveLocation(float x, float y)
+{
+    for (int i = 0; i < 6; i++)
+    {
+        itemSprite[i].move(x, y);
+        locationSprite[i].move(x, y);
+    }
 }
 
 void Location::updateItem(int i)

@@ -61,3 +61,4 @@ void ItemPick::render(sf::RenderTarget& target)
 	if(this->eraseItem == true)
         target.draw(this->pickSprite);
 }
+

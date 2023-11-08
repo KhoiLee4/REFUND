@@ -1,5 +1,6 @@
 #pragma once
 
+#include "gameConfig.h"
 #include "stdafx.h"
 
 /*

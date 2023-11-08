@@ -3,12 +3,12 @@
 void Noise::initNoiseBar()
 {
     // tao khung tieng on
-    noiseBarLayer.setSize(sf::Vector2f(600, 30));
-    noiseBarLayer.setPosition(20, 20);
+    noiseBarLayer.setSize(sf::Vector2f(noiseWidth, noiseHight));
+    noiseBarLayer.setPosition(noiseX, noiseY);
     noiseBarLayer.setFillColor(sf::Color::White);
     // tao phan hien thi luong tieng on
-    noiseBar.setSize(sf::Vector2f(0, 30));
-    noiseBar.setPosition(20, 20);
+    noiseBar.setSize(sf::Vector2f(0, noiseHight));
+    noiseBar.setPosition(noiseX, noiseY);
     noiseBar.setFillColor(sf::Color::Green);
 }
 

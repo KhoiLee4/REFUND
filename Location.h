@@ -1,5 +1,6 @@
 #pragma once
 
+#include "gameConfig.h"
 #include "stdafx.h"
 
 /*
@@ -53,6 +54,8 @@ public:
 	sf::Vector2f getLocationPosition(int i); // tra ve vi tri noi tra do thu i
 	bool getEraseItem(int i); // tra ve eraseItem[i]
 	std::vector<sf::Sprite> getLocationSprite();
+	void moveLocation(float x, float y);
+
 	void updateItem(int i); // cap nhat tra do tai vi tri i
 	void update();
 	void renderItem(sf::RenderTarget& target, int i); // ve cac mon do

@@ -39,6 +39,12 @@ void Game::initLocation()
 	this->location = new Location();
 }
 
+void Game::initView()
+{
+	view.reset(sf::FloatRect(0, 0, screenWidth, screenHight));
+	window.setView(view);
+}
+
 void Game::initItemPick()
 {
 	this->itemPick = new ItemPick();
@@ -54,6 +60,11 @@ void Game::initPlayer()
 	this->player = new Player();
 }
 
+void Game::initMap()
+{
+	this->map = new Map();
+}
+
 Game::Game()
 {
 	thresholdDistance = 30.0f;
@@ -64,6 +75,7 @@ Game::Game()
 	count = 0;
 
 	this->initWindow();
+	//this->initView();
 	this->initNoise();
 	this->initHost();
 	this->initDone();
@@ -71,6 +83,7 @@ Game::Game()
 	this->initItemPick();
 	this->initItem();
 	this->initPlayer();
+	this->initMap();
 }
 
 Game::~Game()
@@ -91,6 +104,7 @@ void Game::gameWinner()
 	{
 		this->checkGameWinner = true; // xac nhan thang
 	}
+
 }
 
 void Game::gameOver()
@@ -101,6 +115,7 @@ void Game::gameOver()
 		this->checkGameOver = true; // xac nhan thua
 		this->host->updateVariables(); // cap nhat lai trang thai chu nha (thuc day)
 	}
+
 }
 
 void Game::increaseNoise()
@@ -110,21 +125,153 @@ void Game::increaseNoise()
 		// neu di cham thi tang 0.01 (giu nut shift)
 		// neu di binh thuong tang 0.1
 		if(player->getCheckSlowly() == true)
-			this->noise->setNoiseIndex(0.01f);
+			this->noise->setNoiseIndex(0.05f);
 		else
 			this->noise->setNoiseIndex(0.1f);
 }
 
-// kiem tra da laij gan vi tri do chua
+// kiem tra da lai gan vi tri do chua
 bool Game::isNearObject(const sf::Vector2f& objectPosition, const sf::Vector2f& targetPosition)
 {
 	// tinh khoang cach tu nhan vat toi vi tri do
 	// cong thuc tinh khoang cach giua 2 diem
-	float distance = std::sqrt(powf((objectPosition.x - targetPosition.x) , 2) +
-		powf((objectPosition.y - targetPosition.y), 2));
+	float distance = std::sqrt(powf((objectPosition.x - targetPosition.x) , 2) 
+		+ powf((objectPosition.y - targetPosition.y), 2));
 	// khoang cach be hon hoac bang khoang cach quy dinh (o gan vi tri do) tra ve true nguoc lai tra ve false
 	return distance <= thresholdDistance;
 }
+
+void Game::move(float moveSpeed)
+{
+	if (player->getanimState() == UP)
+	{
+		moveBackGround(0.f, moveSpeed);
+	}
+
+	// truong hop nhan vat di xuong
+	else if (player->getanimState() == DOWN)
+	{
+		moveBackGround(0.f, -moveSpeed);
+	}
+
+	// truong hop nnhan vat di qua trai
+	else if (player->getanimState() == LEFT)
+	{
+		moveBackGround(moveSpeed, 0.f);
+	}
+
+	// truong hop nhan vat di qua phai
+	else if (player->getanimState() == RIGHT)
+	{
+		moveBackGround(-moveSpeed, 0.f);
+	}
+}
+
+void Game::remove(float moveSpeed)
+{
+
+}
+
+void Game::moveBackGround(float x, float y)
+{
+	map->moveMap(x, y);
+	host->moveHost(x, y);
+	location->moveLocation(x, y);
+	done->moveDone(x, y);
+	item->moveItem(x, y);
+
+}
+
+void Game::checkRangePlayer(float moveSpeed)
+{
+	//bool flag{false};
+	sf::Vector2f playerSize(player->getThiefGlobalBounds().width, player->getThiefGlobalBounds().height);
+	// x, y trong truong hop toa do tang
+	float centerX_inc = (window.getSize().x - playerSize.x) / 2;
+	float centerY_inc = (window.getSize().y - playerSize.y) / 2;
+	//x, y trong truong hop toa do giam
+	float centerX_dec = (window.getSize().x - playerSize.x) / 2 - 1;
+	float centerY_dec = (window.getSize().y - playerSize.y) / 2 - 1;
+	float x = player->getThiefPosition().x;
+	float y = player->getThiefPosition().y;
+
+	/*std::cout << x << "\t" << y << "\t"
+		<< centerX_inc << "\t" << centerY_inc << "\t"
+		<< centerX_dec << "\t" << centerY_dec << "\t" << "\n";*/
+		//std::cout << window.getSize().x << "\t" << window.getSize().y << "\n";
+
+	move(moveSpeed);
+
+	// truong hop nhat vat di toi gua va chua het map
+	if (!map->checkFrame())
+	{
+		if (player->getanimState() == DOWN && y >= centerY_inc)
+		{
+			//std::cout << "map 0000\n";
+			player->setPlayerPosition(0.f, -moveSpeed);
+			//flag = false;
+			//return true;
+		}
+		else if (player->getanimState() == RIGHT && x >= centerX_inc)
+		{
+			//std::cout << "map 1111\n";
+			player->setPlayerPosition(-moveSpeed, 0.f);
+			//flag = false;
+
+			//return true;
+		}
+		else if (player->getanimState() == UP && y - centerY_dec <= 0)
+		{
+			//std::cout << "map 2222\n";
+			player->setPlayerPosition(0.f, moveSpeed);
+			//flag = false;
+
+			//return true;
+		}
+		else if (player->getanimState() == LEFT && x - centerX_dec <= 0)
+		{
+			//std::cout << "map 3333\n";
+			player->setPlayerPosition(moveSpeed, 0.f);
+			//flag = false;
+
+			//return true;
+		}
+		//else flag = true;
+	}
+	//if (flag == true)
+	//{
+	//	if (player->getanimState() == UP)
+	//	{
+	//		map->moveMap(0.f, -moveSpeed);
+	//	}
+
+	//	// truong hop nhan vat di xuong
+	//	else if (player->getanimState() == DOWN)
+	//	{
+	//		map->moveMap(0.f, moveSpeed);
+	//	}
+
+	//	// truong hop nnhan vat di qu trai
+	//	else if (player->getanimState() == LEFT)
+	//	{
+	//		map->moveMap(-moveSpeed, 0.f);
+	//	}
+
+	//	// truong hop nhan vat di qua phai
+	//	else if (player->getanimState() == RIGHT)
+	//	{
+	//		map->moveMap(moveSpeed, 0.f);
+	//	}
+	//}
+
+	/*if (y >= screenHight / 4 && !map->checkFrame())
+	{
+		std::cout << "background di chuyen\n";
+		return true;
+	}*/
+	//return false;
+}
+
 
 /* Cac ham de cap nhat */
 void Game::updateNoise()
@@ -136,13 +283,13 @@ void Game::updateHost()
 {
 	this->host->update();
 }
-
+// *****
 void Game::updatePickSpritePosition()
 {
 	float pickX, pickY;
 	pickX = this->player->getThiefPosition().x;
 	pickY = this->player->getThiefPosition().y;
-	this->itemPick->setPickSpritePosition(pickX - 4.0f, pickY);
+	this->itemPick->setPickSpritePosition(pickX - 4.0f, pickY); // can sua lai //
 
 }
 
@@ -173,6 +320,44 @@ void Game::updatePlayer()
 	this->player->update();
 }
 
+void Game::updateMap()
+{
+	float moveSpeed = player->getMoveSpeed();
+	checkRangePlayer(moveSpeed);
+	// truong hop nhat vat dang o giua
+	// chi di chuyen map khong di chuyen nhan vat
+	//if (checkRangePlayer(moveSpeed))
+	//{
+	//	if (player->getanimState() == UP)
+	//	{
+	//		map->moveMap(0.f, moveSpeed);
+	//		player->setPlayerPosition(0.f, moveSpeed);
+	//	}
+
+	//	// truong hop nhan vat di xuong
+	//	else if (player->getanimState() == DOWN)
+	//	{
+	//		map->moveMap(0.f, -moveSpeed);
+	//		player->setPlayerPosition(0.f, -moveSpeed);
+	//	}
+
+	//	// truong hop nnhan vat di qu trai
+	//	else if (player->getanimState() == LEFT)
+	//	{
+	//		map->moveMap(moveSpeed + 0.5, 0.f);
+	//		player->setPlayerPosition(moveSpeed, 0.f);
+	//	}
+
+	//	// truong hop nhan vat di qua phai
+	//	else if (player->getanimState() == RIGHT)
+	//	{
+	//		map->moveMap(-moveSpeed - 0.5, 0.f);
+	//		player->setPlayerPosition(-moveSpeed, 0.f);
+	//	}
+	//}
+	//map->updateFrame();
+}
+
 void Game::update()
 {
 	/*this->shuffle(this->item->itemTextures);
@@ -181,19 +366,23 @@ void Game::update()
 	
 	// -- chay chuong trinh -- //
 	while (this->window.pollEvent(this->ev))
+	//if (this->window.pollEvent(this->ev))
 	{
 		// truong hop bam tat cua so
 		if (this->ev.type == sf::Event::Closed)
 			this->window.close(); // dong cua so
+
 		// truong hop bam nut ESC
 		else if (this->ev.type == sf::Event::KeyPressed && this->ev.key.code == sf::Keyboard::Escape)
 			this->window.close(); // dong cua so
+
 		// truong hop van dang choi (chua thang va chua thua)
 		else if (!this->checkGameOver && !this->checkGameWinner)
 		{
 		// -- Xet cac truong hop bam E -- //
 			// truong hop nhan phim E
-			if (this->ev.type == sf::Event::KeyPressed && this->ev.key.code == sf::Keyboard::E && !this->keyPressed)
+			//if (this->ev.type == sf::Event::KeyPressed && this->ev.key.code == sf::Keyboard::E && !this->keyPressed)
+			if (this->ev.type == sf::Event::KeyPressed && this->ev.key.code == sf::Keyboard::E)
 			{
 				//std::cout << "Phim E duoc nhan" << std::endl;
 				// trung hop chua lay do va chua tra het do
@@ -225,11 +414,11 @@ void Game::update()
 				}
 				this->keyPressed = true;
 			}
-			else if (this->ev.type == sf::Event::KeyReleased && this->ev.key.code == sf::Keyboard::E)
+			/*else if (this->ev.type == sf::Event::KeyReleased && this->ev.key.code == sf::Keyboard::E)
 			{
 				std::cout << "Phim E duoc tha ra" << std::endl;
 				this->keyPressed = false;
-			}
+			}*/
 		}
 	}
 	// truong hop van dang choi (chua thang va chua thua)
@@ -239,17 +428,20 @@ void Game::update()
 		this->updateNoise(); // cap nhat tieng on
 		this->updatePickSpritePosition(); // cap nhat do tren tay nhan vat
 		this->updatePlayer(); // cap nhat chuyen dong nhan vat
+		this->updateMap();
 	}
-	this->gameWinner();
-	this->gameOver();
-	this->updateHost();
+	this->gameWinner(); // kiem tra dieu kien thang
+	this->gameOver(); // kiem tra dieu kien thua
+	this->updateHost(); // cap nhat chu nha
 }
+
 
 /* Cac ham de ve */
 void Game::renderNoise()
 {
 	this->noise->render(this->window);
 }
+
 
 void Game::renderHost()
 {
@@ -306,12 +498,18 @@ void Game::renderPlayer()
 	this->player->render(this->window);
 }
 
+void Game::renderMap()
+{
+	this->map->render(this->window);
+}
+
 void Game::render()
 {
 	// lam sach mang hinh
 	this->window.clear();
 
 	//Render game
+	this->renderMap();
 	this->renderNoise();
 	this->renderHost();
 	this->renderNearLocation();
@@ -331,10 +529,13 @@ const sf::RenderWindow & Game::getWindow() const
 
 void Game::runGame()
 {
+	// thoiwf bat dau
 	while (window.isOpen())
 	{
 		update();
 		render();
 	}
 }
+
+
 
