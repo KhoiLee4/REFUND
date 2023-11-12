@@ -1,7 +1,7 @@
 #pragma once
 // kich thuoc mang hinh
-#define screenWidth 1600
-#define screenHight 900
+#define screenWidth 1280
+#define screenHight 720
 
 // thanh tieng on
 #define noiseWidth 600
