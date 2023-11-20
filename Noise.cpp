@@ -15,7 +15,7 @@ void Noise::initNoiseBar()
 void Noise::initNoiseIndex()
 {
     this->currentNoise = 0.f; // luong tieng on ban dau
-    this->maxNoise = 200.f; // luong tieng on toi da
+    this->maxNoise = 20000.f; // luong tieng on toi da
 }
 
 Noise::Noise()

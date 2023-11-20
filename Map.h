@@ -18,8 +18,14 @@ enum ANIMATION_STATES {
 class Map
 {
 private:
-	sf::Texture mapTexture;
-	sf::Sprite mapSprite;
+	sf::Texture floorTexture;
+	sf::Sprite floorSprite;
+	sf::Texture wall1Texture;
+	sf::Sprite wall1Sprite;
+	sf::Texture wall2Texture;
+	sf::Sprite wall2Sprite;
+	sf::Texture wall3Texture;
+	sf::Sprite wall3Sprite;
 	//Player player;
 
 	void initTexture();

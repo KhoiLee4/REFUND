@@ -220,9 +220,7 @@ void Game::checkRangePlayer(float moveSpeed)
 	float x = player->getThiefPosition().x;
 	float y = player->getThiefPosition().y;
 
-	/*std::cout << x << "\t" << y << "\t"
-		<< centerX_inc << "\t" << centerY_inc << "\t"
-		<< centerX_dec << "\t" << centerY_dec << "\t" << "\n";*/
+	std::cout << x << "\t" << y << "\n";
 		//std::cout << window.getSize().x << "\t" << window.getSize().y << "\n";
 
 	move(moveSpeed);

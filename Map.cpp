@@ -3,19 +3,42 @@
 void Map::initTexture()
 {
 	// lay hinh tu data vao
-	if (!this->mapTexture.loadFromFile("Data/Textures/Background/sky.png"))
+	if (!this->floorTexture.loadFromFile("Data/Textures/Background/Floor.png"))
 	{
-		std::cout << "ERROR::PLAYER::Could not load the player sheet!" << '\n';
+		std::cout << "ERROR::Could not load floor!" << '\n';
 	}
+	if (!this->wall1Texture.loadFromFile("Data/Textures/Background/Wall01.png"))
+	{
+		std::cout << "ERROR::Could not load Wall01!" << '\n';
+	}
+	if (!this->wall2Texture.loadFromFile("Data/Textures/Background/Wall02.png"))
+	{
+		std::cout << "ERROR::Could not load Wall02!" << '\n';
+	}
+	if (!this->wall3Texture.loadFromFile("Data/Textures/Background/Wall03.png"))
+	{
+		std::cout << "ERROR::Could not load Wall03!" << '\n';
+	}
+
 }
 
 void Map::initSprite()
 {
-	//this->mapSprite.setSize(sf::Vector2f(screenWidth+20, screenHight+20));
-	this->mapSprite.setTexture(mapTexture);
-	//this->mapSprite.setPosition(0, mapSprite.getGlobalBounds().height / 2);
-	//this->mapSprite.setPosition(0, 0);
-	this->mapSprite.setScale(10.f, 10.f);
+	this->floorSprite.setTexture(floorTexture);
+	this->floorSprite.setScale(1.f, 1.f);
+	this->floorSprite.setPosition(-1200, -1200);
+
+	this->wall1Sprite.setTexture(wall1Texture);
+	this->wall1Sprite.setScale(1.f, 1.f);
+	this->wall1Sprite.setPosition(-1200, -1200);
+
+	this->wall2Sprite.setTexture(wall2Texture);
+	this->wall2Sprite.setScale(1.f, 1.f);
+	this->wall2Sprite.setPosition(-1200, -1200);
+
+	this->wall3Sprite.setTexture(wall3Texture);
+	this->wall3Sprite.setScale(1.f, 1.f);
+	this->wall3Sprite.setPosition(-1200, -1200);
 
 }
 
@@ -35,23 +58,23 @@ Map::~Map()
 bool Map::checkFrame()
 {
 	// xet tren truc Ox
-	if (-mapSprite.getPosition().x + screenWidth > mapSprite.getGlobalBounds().width)
+	if (-floorSprite.getPosition().x + screenWidth > floorSprite.getGlobalBounds().width)
 	{
 		//mapSprite.move(-mapSprite.getPosition().x + screenWidth - mapSprite.getGlobalBounds().width, 0.f);
 		return true;
 	}
-	if (mapSprite.getPosition().x > 0)
+	if (floorSprite.getPosition().x > 0)
 	{
 		//mapSprite.move(-mapSprite.getPosition().x, 0.f);
 		return true;
 	}
 	// xet tren truc Oy
-	if (-mapSprite.getPosition().y + screenWidth > mapSprite.getGlobalBounds().height)
+	if (-floorSprite.getPosition().y + screenWidth > floorSprite.getGlobalBounds().height)
 	{
 		//mapSprite.move(0.f, -mapSprite.getPosition().y + screenWidth - mapSprite.getGlobalBounds().height);
 		return true;
 	}
-	if (mapSprite.getPosition().y > 0)
+	if (floorSprite.getPosition().y > 0)
 	{
 		//mapSprite.move(0.f, -mapSprite.getPosition().y);
 		return true;
@@ -117,10 +140,17 @@ bool Map::checkFrame()
 
 void Map::moveMap(float x, float y)
 {
-	mapSprite.move(x, y);
+	floorSprite.move(x, y);
+	wall1Sprite.move(x, y);
+	wall2Sprite.move(x, y);
+	wall3Sprite.move(x, y);
 }
 
 void Map::render(sf::RenderTarget& target)
 {
-	target.draw(this->mapSprite);
+	target.draw(this->floorSprite);
+	target.draw(this->wall1Sprite);
+	target.draw(this->wall2Sprite);
+	target.draw(this->wall3Sprite);
+
 }

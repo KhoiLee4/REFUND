@@ -19,9 +19,9 @@ void Player::initSprite()
 {
 	// tao doi tuong trom (nhan vat)
 	this->thiefSprite.setTexture(this->textureSheet);
-	this->currentFrame = sf::IntRect(0,0,32,48);
+	this->currentFrame = sf::IntRect(0,0,100,150);
 	this->thiefSprite.setTextureRect(this->currentFrame); //Cutting sprite
-	this->thiefSprite.setScale(1.5f, 1.5f); //Increase sprite size
+	this->thiefSprite.setScale(0.8f, 0.8f); //Increase sprite size
 	this->thiefSprite.setPosition(390, 290);
 }
 
@@ -178,36 +178,36 @@ void Player::updateAnimation()
 		// truong hop nhan vat di xuong
 		else if (this->animState == PLAYER_ANIMATION_STATES::MOVING_DOWN)
 		{
-			this->currentFrame.top = 48.f;
-			this->currentFrame.left += 32.f;
-			if (this->currentFrame.left >= 128.f)
+			this->currentFrame.top = 150.f;
+			this->currentFrame.left += 100.f;
+			if (this->currentFrame.left >= 400.f)
 				this->currentFrame.left = 0;
 		}
 
 		//truong hop nhan vat di sang trai
 		else if (this->animState == PLAYER_ANIMATION_STATES::MOVING_LEFT)
 		{
-			this->currentFrame.top = 96.f;
-			this->currentFrame.left += 32.f;
-			if (this->currentFrame.left >= 128.f)
+			this->currentFrame.top = 300.f;
+			this->currentFrame.left += 100.f;
+			if (this->currentFrame.left >= 400.f)
 				this->currentFrame.left = 0;
 		}
 
 		//truong hop nhan vat di sang phai
 		else if (this->animState == PLAYER_ANIMATION_STATES::MOVING_RIGHT)
 		{
-			this->currentFrame.top = 144.f;
-			this->currentFrame.left += 32.f;
-			if (this->currentFrame.left >= 128.f)
+			this->currentFrame.top = 450.f;
+			this->currentFrame.left += 100.f;
+			if (this->currentFrame.left >= 400.f)
 				this->currentFrame.left = 0;
 		}
 
 		//truong hop nhan vat di len
 		else if (this->animState == PLAYER_ANIMATION_STATES::MOVING_UP)
 		{
-			this->currentFrame.top = 192.f;
-			this->currentFrame.left += 32.f;
-			if (this->currentFrame.left >= 128.f)
+			this->currentFrame.top = 600.f;
+			this->currentFrame.left += 100.f;
+			if (this->currentFrame.left >= 400.f)
 				this->currentFrame.left = 0;
 		}
 
