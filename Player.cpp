@@ -22,7 +22,7 @@ void Player::initSprite()
 	this->currentFrame = sf::IntRect(0,0,100,150);
 	this->thiefSprite.setTextureRect(this->currentFrame); //Cutting sprite
 	this->thiefSprite.setScale(0.8f, 0.8f); //Increase sprite size
-	this->thiefSprite.setPosition(390, 290);
+	this->thiefSprite.setPosition(thiefX, thiefY);
 }
 
 void Player::initAnimations()

@@ -37,10 +37,12 @@ public:
 	virtual ~Map();
 
 	bool checkFrame(); // kiem tra map da vuot khung hinh chua
-	//bool checkRangePlayer(Player *player); // kiem tra vi tri cua nha vat
+	bool checkRangePlayer(sf::Vector2f playerPosition, short move); // kiem tra vi tri cua nha vat
+	bool checkWall(float y); // kiem tra vi tri nhan vat de in tuong
 	//void update(Player *player);
 	void moveMap(float x, float y);
-	void render(sf::RenderTarget& target); // ve map
-
+	void render1(sf::RenderTarget& target); // ve tuong 1
+	void render2(sf::RenderTarget& target); // ve tuong 2
+	void render3(sf::RenderTarget& target); // ve tuong 3
 };
 

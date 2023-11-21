@@ -3,7 +3,7 @@
 void ItemPick::initTexture()
 {
     // lay hinh trong data vao
-    for (int i = 1; i <= 6; i++) 
+    for (int i = 1; i <= 5; i++) 
     {
         sf::Texture texture; // doi tuong luu anh do
 

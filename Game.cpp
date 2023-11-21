@@ -72,7 +72,7 @@ void Game::initMap()
 
 Game::Game()
 {
-	thresholdDistance = 30.0f;
+	thresholdDistance = 50.0f;
 	checkGameWinner = false;
 	checkGameOver = false;
 	keyE = true;
@@ -139,7 +139,7 @@ bool Game::isNearObject(const sf::Vector2f& objectPosition, const sf::Vector2f& 
 {
 	// tinh khoang cach tu nhan vat toi vi tri do
 	// cong thuc tinh khoang cach giua 2 diem
-	float distance = std::sqrt(powf((objectPosition.x - targetPosition.x) , 2) 
+	float distance = std::sqrt(powf((objectPosition.x - targetPosition.x) , 2)
 		+ powf((objectPosition.y - targetPosition.y), 2));
 	// khoang cach be hon hoac bang khoang cach quy dinh (o gan vi tri do) tra ve true nguoc lai tra ve false
 	return distance <= thresholdDistance;
@@ -214,14 +214,14 @@ void Game::checkRangePlayer(float moveSpeed)
 	// x, y trong truong hop toa do tang
 	float centerX_inc = (window.getSize().x - playerSize.x) / 2;
 	float centerY_inc = (window.getSize().y - playerSize.y) / 2;
-	//x, y trong truong hop toa do giam
+	// x, y trong truong hop toa do giam
 	float centerX_dec = (window.getSize().x - playerSize.x) / 2 - 1;
 	float centerY_dec = (window.getSize().y - playerSize.y) / 2 - 1;
+	// vi tri nhan vat
 	float x = player->getThiefPosition().x;
 	float y = player->getThiefPosition().y;
 
-	std::cout << x << "\t" << y << "\n";
-		//std::cout << window.getSize().x << "\t" << window.getSize().y << "\n";
+	/*std::cout << x << "\t" << y << "\n";*/
 
 	move(moveSpeed);
 
@@ -258,6 +258,10 @@ void Game::checkRangePlayer(float moveSpeed)
 			//flag = false;
 
 			//return true;
+		}
+		if (map->checkRangePlayer(player->getThiefPosition(), player->getanimState()))
+		{
+			remove(moveSpeed);
 		}
 		//else flag = true;
 	}
@@ -328,7 +332,7 @@ void Game::updatePickSpritePosition()
 	float pickX, pickY;
 	pickX = this->player->getThiefPosition().x;
 	pickY = this->player->getThiefPosition().y;
-	this->itemPick->setPickSpritePosition(pickX - 4.0f, pickY); // can sua lai //
+	this->itemPick->setPickSpritePosition(pickX - 10.0f, pickY + 10.f); // can sua lai //
 
 }
 
@@ -427,8 +431,8 @@ void Game::update()
 				// trung hop chua lay do va chua tra het do
 				if (this->keyE == true && !this->done->check())
 				{
-					std::cout << "Phim E lay duoc nhan" << std::endl;
 					// kiem tra nhan vat da lai gan vi tri do hay chua
+					std::cout << "Phim E lay duoc nhan" << std::endl;
 					if (isNearObject(this->player->getThiefPosition(), this->item->getItemPosition()))
 					{
 						this->item->updateItem(); // chuyen qua mon do tiep theo (tai cho lay do)
@@ -495,7 +499,7 @@ void Game::renderItemLocation(int i)
 void Game::renderNearLocation()
 {
 	// kiem tra tat ca cac vi tri
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		// truong hop chua tra do
 		if (this->done->getDoneCheck(i) == false)
@@ -514,7 +518,7 @@ void Game::renderNearLocation()
 
 void Game::renderLocation()
 {
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		if (i < this->location->getLocationSprite().size())
 			this->location->render(this->window, i);
@@ -539,7 +543,25 @@ void Game::renderPlayer()
 
 void Game::renderMap()
 {
-	this->map->render(this->window);
+	this->map->render1(this->window);
+	if (map->checkWall(player->getThiefPosition().y))
+	{
+		this->map->render2(this->window);
+		this->renderLocation();
+		this->renderNearLocation();
+		this->renderPlayer();
+		this->renderItemPick();
+		this->map->render3(this->window);
+	}
+	else
+	{
+		this->renderLocation();
+		this->renderNearLocation();
+		this->renderPlayer();
+		this->renderItemPick();
+		this->map->render2(this->window);
+		this->map->render3(this->window);
+	}
 }
 
 void Game::render()
@@ -551,11 +573,7 @@ void Game::render()
 	this->renderMap();
 	this->renderNoise();
 	this->renderHost();
-	this->renderNearLocation();
-	this->renderLocation();
-	this->renderItemPick();
 	this->renderItem();
-	this->renderPlayer();
 
 	// day hinh ve tu bo dem len
 	this->window.display();

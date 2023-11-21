@@ -3,10 +3,10 @@
 void Location::initItemTextures()
 {
     // lay hinh tu data vao
-    for (int i = 1; i <= 6; i++)
+    for (int i = 1; i <= 5; i++)
     {
         sf::Texture texture;
-        if (texture.loadFromFile("Data/Textures/Items/item" + std::to_string(i) + ".png"))
+        if (texture.loadFromFile("Data/Textures/Locations/item" + std::to_string(i) + ".png"))
         {
             this->itemTextures.push_back(texture); // them vao cuoi (bat dau tu 0)
         }
@@ -19,7 +19,7 @@ void Location::initItemTextures()
 
 void Location::initItemSprite()
 {
-   for (int i = 0; i < 6; i++)
+   for (int i = 0; i < 5; i++)
     {
        sf::Sprite sprite;
        if (i < this->itemTextures.size())
@@ -32,14 +32,13 @@ void Location::initItemSprite()
 
 void Location::initItemPosition()
 {
-    if (this->itemSprite.size() == 6)
+    if (this->itemSprite.size() == 5)
     {
         this->itemSprite[0].setPosition(itemLocationX_01, itemLocationY_01);
         this->itemSprite[1].setPosition(itemLocationX_02, itemLocationY_02);
         this->itemSprite[2].setPosition(itemLocationX_03, itemLocationY_03);
         this->itemSprite[3].setPosition(itemLocationX_04, itemLocationY_04);
         this->itemSprite[4].setPosition(itemLocationX_05, itemLocationY_05);
-        this->itemSprite[5].setPosition(itemLocationX_06, itemLocationY_06);
     }
 }
 
@@ -52,11 +51,11 @@ void Location::initItem()
 
 void Location::initLocationTextures()
 {
-    for (int i = 1; i <= 6; i++)
+    for (int i = 0; i < 5; i++)
     {
         sf::Texture texture;
 
-        if (texture.loadFromFile("Data/Textures/Locations/location" + std::to_string(i) + ".png")) {
+        if (texture.loadFromFile("Data/Textures/Locations/location.png")) {
             this->locationTextures.push_back(texture);
         }
         else {
@@ -68,7 +67,7 @@ void Location::initLocationTextures()
 
 void Location::initLocationSprite()
 {
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 5; i++)
     {
         sf::Sprite sprite;
         if (i < this->locationTextures.size())
@@ -82,14 +81,13 @@ void Location::initLocationSprite()
 
 void Location::initLocationPosition()
 {
-    if (this->locationSprite.size() == 6)
+    if (this->locationSprite.size() == 5)
     {
-        this->locationSprite[0].setPosition(250, 350);
-        this->locationSprite[1].setPosition(300, 400);
-        this->locationSprite[2].setPosition(350, 450);
-        this->locationSprite[3].setPosition(400, 500);
-        this->locationSprite[4].setPosition(450, 500);
-        this->locationSprite[5].setPosition(500, 550);
+        this->locationSprite[0].setPosition(locationX_01, locationY_01);
+        this->locationSprite[1].setPosition(locationX_02, locationY_02);
+        this->locationSprite[2].setPosition(locationX_03, locationY_03);
+        this->locationSprite[3].setPosition(locationX_04, locationY_04);
+        this->locationSprite[4].setPosition(locationX_05, locationY_05);
     }
     //this->locationSprite.setPosition(300, 400);
 }
@@ -103,7 +101,7 @@ void Location::initLocation()
 
 void Location::initEraseItem()
 {
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 5; i++)
     {
         eraseItem.push_back(true);
     }
@@ -122,7 +120,29 @@ Location::~Location()
 
 sf::Vector2f Location::getLocationPosition(int i)
 {
-    return this->locationSprite[i].getPosition();
+    sf::Vector2f position;
+    position.x = this->locationSprite[i].getPosition().x;
+    if (i == 0)
+    {
+        position.y = this->locationSprite[i].getPosition().y + 150;
+    }
+    else if (i == 1)
+    {
+        position.y = this->locationSprite[i].getPosition().y;
+    }
+    else if (i == 2)
+    {
+        position.y = this->locationSprite[i].getPosition().y + 140;
+    }
+    else if (i == 3)
+    {
+        position.y = this->locationSprite[i].getPosition().y + 160;
+    }
+    else
+    {
+        position.y = this->locationSprite[i].getPosition().y + 100;
+    }
+    return position;
 }
 
 bool Location::getEraseItem(int i)
@@ -137,7 +157,7 @@ std::vector<sf::Sprite> Location::getLocationSprite()
 
 void Location::moveLocation(float x, float y)
 {
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 5; i++)
     {
         itemSprite[i].move(x, y);
         locationSprite[i].move(x, y);

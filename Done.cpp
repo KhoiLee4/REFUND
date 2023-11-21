@@ -2,7 +2,7 @@
 
 void Done::initTexture()
 {
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 5; i++)
     {
         sf::Texture texture; // tao doi tuong luu anh
 
@@ -19,7 +19,7 @@ void Done::initTexture()
 
 void Done::initSprite()
 {
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 5; i++)
     {
         sf::Sprite sprite;
         if (i < this->doneTexture.size())
@@ -32,7 +32,7 @@ void Done::initSprite()
 
 void Done::initCheck()
 {
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 5; i++)
     {
         doneCheck.push_back(false);
     }
@@ -40,14 +40,13 @@ void Done::initCheck()
 
 void Done::initPosition()
 {
-    if (this->doneSprite.size() == 6)
+    if (this->doneSprite.size() == 5)
     {
         this->doneSprite[0].setPosition(doneX_01, doneY_01);
         this->doneSprite[1].setPosition(doneX_02, doneY_02);
         this->doneSprite[2].setPosition(doneX_03, doneY_03);
         this->doneSprite[3].setPosition(doneX_04, doneY_04);
         this->doneSprite[4].setPosition(doneX_05, doneY_05);
-        this->doneSprite[5].setPosition(doneX_06, doneY_06);
     }
 }
 
@@ -75,7 +74,7 @@ bool Done::getDoneCheck(int i)
 
 bool Done::check()
 {
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 5; i++)
     {
         if (doneCheck[i] == false) return false;
     }
@@ -89,7 +88,7 @@ void Done::updateCheck(int i)
 
 void Done::moveDone(float x, float y)
 {
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 5; i++)
     {
         doneSprite[i].move(x, y);
     }

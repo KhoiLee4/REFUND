@@ -3,7 +3,7 @@
 void Item::initTexture()
 {
     // lay hinh tu data vao
-    for (int i = 1; i <= 6; i++) 
+    for (int i = 1; i <= 5; i++) 
     {
         sf::Texture texture; // tao doi tuong luu anh do
         if (texture.loadFromFile("Data/Textures/Items/item" + std::to_string(i) + ".png"))
@@ -40,7 +40,7 @@ void Item::initSprite()
     this->currentSprite.setPosition(itemX, itemY); // vi tri xuat hien ban dau (noi lay do)
     this->currentSprite.setTexture(this->itemTextures[currentItem]); // gan hinh do hien tai
     this->carSprite.setPosition(carX, carY); // vi tri xuat hien ban dau (noi lay do)
-    this->carSprite.setTexture(this->carTextures[0]); // gan hinh do hien tai
+    this->carSprite.setTexture(this->carTextures[1]); // gan hinh do hien tai
 }
 
 Item::Item()
@@ -63,7 +63,10 @@ void Item::moveItem(float x, float y)
 
 sf::Vector2f Item::getItemPosition()
 {
-    return this->currentSprite.getPosition();
+    sf::Vector2f position;
+    position.x = this->currentSprite.getPosition().x + 150;
+    position.y = this->currentSprite.getPosition().y ;
+    return position;
 }
 
 void Item::updateItem()
