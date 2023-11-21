@@ -24,25 +24,9 @@ void Game::initDone()
 	this->done = new Done();
 }
 
-//void Game::initDone()
-//{
-//	for (int i = 0; i < 6; i++)
-//	{
-//		this->done[i] = false;
-//	}
-//	this->doneTexture.loadFromFile("Data/Textures/Done/done.jpg");
-//	this->doneSprite.setTexture(this->doneTexture);
-//}
-
 void Game::initLocation()
 {
 	this->location = new Location();
-}
-
-void Game::initView()
-{
-	view.reset(sf::FloatRect(0, 0, screenWidth, screenHight));
-	window.setView(view);
 }
 
 void Game::initRecordTime()
@@ -80,7 +64,6 @@ Game::Game()
 	count = 0;
 
 	this->initWindow();
-	//this->initView();
 	this->initNoise();
 	this->initHost();
 	this->initDone();
@@ -89,6 +72,7 @@ Game::Game()
 	this->initItem();
 	this->initPlayer();
 	this->initMap();
+	this->initRecordTime();
 }
 
 Game::~Game()
@@ -118,6 +102,9 @@ void Game::gameOver()
 	{
 		this->checkGameOver = true; // xac nhan thua
 		this->host->updateVariables(); // cap nhat lai trang thai chu nha (thuc day)
+		std::chrono::seconds duration(3);
+		std::this_thread::sleep_for(duration);
+
 	}
 
 }
@@ -336,22 +323,6 @@ void Game::updatePickSpritePosition()
 
 }
 
-//bool Game::checkDone()
-//{
-//	for (int i = 0; i < 6; i++)
-//	{
-//		if (done[i] == false) return false;
-//	}
-//	return true;
-//}
-
-//void Game::shuffle(std::vector<sf::Texture>& texture)
-//{
-//	std::random_device rd;  // Tạo một thiết bị ngẫu nhiên
-//	std::mt19937 g(rd());   // Tạo một generator ngẫu nhiên
-//
-//	std::shuffle(texture.begin(), texture.end()-1, g);  // Sử dụng std::shuffle để xáo trộn vector
-//}
 
 void Game::updateLocation(int i)
 {

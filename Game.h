@@ -29,7 +29,6 @@ class Game
 private:
 	sf::RenderWindow window; // cua so cuar game
 	sf::Event ev; // bien bat su kien
-	sf::View view;
 	std::ofstream outFile;
 	std::string name;
 	sf::Clock recordTime;
@@ -53,7 +52,6 @@ private:
 	Map* map;
 
 	void initWindow(); // khoi tao cua so
-	void initView();
 	void initRecordTime(); // khoi tao thoi gian luu ky luc
 	void initNoise(); // khoi tao tieng on
 	void initHost(); // khoi tao chu nha
@@ -62,7 +60,7 @@ private:
 	void initItemPick(); // khoi tao do tren tay nhan vat
 	void initItem(); // khoi tao do tai vi tri ban dau
 	void initPlayer(); // khoi tao nhan vat
-	void initMap();
+	void initMap(); // khoi tao map
 
 public:
 	Game(); 
