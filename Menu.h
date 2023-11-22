@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "Record.h"
 #include "Game.h"
+#include "Setting.h"
 #include "gameConfig.h"
 #include <iostream>
 

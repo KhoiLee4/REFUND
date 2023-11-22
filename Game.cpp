@@ -9,6 +9,12 @@ void Game::initWindow()
 	this->window.setFramerateLimit(144);
 }
 
+//void Game::initWinLose()
+//{
+//	this->win = new Win();
+//	this->lose = new Lose();
+//}
+
 void Game::initNoise()
 {
 	this->noise = new Noise();
@@ -54,6 +60,15 @@ void Game::initMap()
 	this->map = new Map();
 }
 
+void Game::initSound()
+{
+	buffer.loadFromFile("Data/Textures/Sound/Game.wav");
+
+	sound.setBuffer(buffer);
+
+	sound.play();
+}
+
 Game::Game()
 {
 	thresholdDistance = 50.0f;
@@ -64,6 +79,7 @@ Game::Game()
 	count = 0;
 
 	this->initWindow();
+	//this->initWinLose();
 	this->initNoise();
 	this->initHost();
 	this->initDone();
@@ -73,6 +89,8 @@ Game::Game()
 	this->initPlayer();
 	this->initMap();
 	this->initRecordTime();
+	this->initSound();
+
 }
 
 Game::~Game()
@@ -89,22 +107,30 @@ Game::~Game()
 void Game::gameWinner()
 {
 	// tra het do thi THANG
-	if (this->done->check())
+	if (this->done->check() || WIN == 1)
 	{
 		this->checkGameWinner = true; // xac nhan thang
+		float time = recordTime.getElapsedTime().asSeconds();
+		sound.stop();
+		window.close();
+		Win win;
+		win.runWin(time);
 	}
 }
 
 void Game::gameOver()
 {
 	// dat tieng on toi da thi THUA
-	if (this->noise->checkNoiseMax() == true)
+	if (this->noise->checkNoiseMax() == true || LOSE == 1)
 	{
 		this->checkGameOver = true; // xac nhan thua
 		this->host->updateVariables(); // cap nhat lai trang thai chu nha (thuc day)
-		std::chrono::seconds duration(3);
-		std::this_thread::sleep_for(duration);
-
+		/*std::chrono::seconds duration(1);
+		std::this_thread::sleep_for(duration);*/
+		sound.stop();
+		window.close();
+		Lose lose;
+		lose.runLose();
 	}
 
 }
@@ -116,9 +142,9 @@ void Game::increaseNoise()
 		// neu di cham thi tang 0.01 (giu nut shift)
 		// neu di binh thuong tang 0.1
 		if(player->getCheckSlowly() == true)
-			this->noise->setNoiseIndex(0.05f);
+			this->noise->setNoiseIndex(0.025f);
 		else
-			this->noise->setNoiseIndex(0.1f);
+			this->noise->setNoiseIndex(0.05f);
 }
 
 // kiem tra da lai gan vi tri do chua
@@ -193,6 +219,7 @@ void Game::moveBackGround(float x, float y)
 	item->moveItem(x, y);
 
 }
+
 
 void Game::checkRangePlayer(float moveSpeed)
 {
@@ -319,7 +346,7 @@ void Game::updatePickSpritePosition()
 	float pickX, pickY;
 	pickX = this->player->getThiefPosition().x;
 	pickY = this->player->getThiefPosition().y;
-	this->itemPick->setPickSpritePosition(pickX - 10.0f, pickY + 10.f); // can sua lai //
+	this->itemPick->setPickSpritePosition(pickX + 30.f, pickY - 40.f); // can sua lai //
 
 }
 
@@ -523,6 +550,8 @@ void Game::renderMap()
 		this->renderPlayer();
 		this->renderItemPick();
 		this->map->render3(this->window);
+		this->map->render4(this->window);
+
 	}
 	else
 	{
@@ -532,6 +561,7 @@ void Game::renderMap()
 		this->renderItemPick();
 		this->map->render2(this->window);
 		this->map->render3(this->window);
+		this->map->render4(this->window);
 	}
 }
 

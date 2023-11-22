@@ -19,7 +19,10 @@ void Map::initTexture()
 	{
 		std::cout << "ERROR::Could not load Wall03!" << '\n';
 	}
-
+	if (!this->wall4Texture.loadFromFile("Data/Textures/Background/Wall04.png"))
+	{
+		std::cout << "ERROR::Could not load Wall03!" << '\n';
+	}
 }
 
 void Map::initSprite()
@@ -40,6 +43,9 @@ void Map::initSprite()
 	this->wall3Sprite.setScale(1.f, 1.f);
 	this->wall3Sprite.setPosition(mapX, mapY);
 
+	this->wall4Sprite.setTexture(wall4Texture);
+	this->wall4Sprite.setScale(1.f, 1.f);
+	this->wall4Sprite.setPosition(mapX, mapY);
 }
 
 Map::Map()
@@ -263,14 +269,14 @@ bool Map::checkWall(float y)
 	return false;
 }
 
-
-
 void Map::moveMap(float x, float y)
 {
 	floorSprite.move(x, y);
 	wall1Sprite.move(x, y);
 	wall2Sprite.move(x, y);
 	wall3Sprite.move(x, y);
+	wall4Sprite.move(x, y);
+
 }
 
 
@@ -290,3 +296,9 @@ void Map::render3(sf::RenderTarget& target)
 {
 	target.draw(this->wall3Sprite);
 }
+
+void Map::render4(sf::RenderTarget& target)
+{
+	target.draw(this->wall4Sprite);
+}
+

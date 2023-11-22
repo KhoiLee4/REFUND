@@ -1,46 +1,45 @@
 #pragma once
+#include "Menu.h"
 #include "stdafx.h"
 #include "gameConfig.h"
-#include <string.h>
 #include <fstream>
-#include "Record.h"
+
+struct Data
+{
+	std::string name;
+	float score;
+};
 
 class Record
 {
 private:
-	sf::RenderWindow window; // cua so cuar game
+	sf::RenderWindow *window; // cua so cuar game
 	sf::Texture backgroundTexture; // tao doi tuong luu anh
 	sf::RectangleShape background; // background la hinh vuong
 	sf::Font font; // tao font
+	sf::Text t0;
+	sf::Text t1;
+	sf::Text t2;
+	sf::Text t3;
 	sf::Event ev; // bien bat su kien
-	sf::Clock recordTime;
-	std::vector<float> recordTimeList;
-	std::vector<std::string> userName;
-	sf::RectangleShape recordFrame;
-	std::ifstream inFile;
+	Data *data;
+	Data now;
 	
 	void initWindow();
 	void initBackGround();
 	void initFont();
-	void initRecordTime();
-	void initRecordFrame();
-	void initRecordTimeList();
+	void initText();
+	void initData();
+
 public:
 	Record();
 	~Record();
 
-	void merge(std::vector<float>& arr, int left, int middle, int right); // Ham merge hai mang con da sap xep thanh 1 mang da sap xep
-	void mergeSort(std::vector<float>& arr, int left, int right); // Ham sap xep vector su dung merge sort
+	void merge(Data *arr, int left, int middle, int right); // Ham merge hai mang con da sap xep thanh 1 mang da sap xep
+	void mergeSort(Data* arr, int left, int right); // Ham sap xep vector su dung merge sort
 	void sortRecord();
-	//update
-	void update();
-	//render
-	void renderBackGround();
-	void renderFrame();
-	void renderTime();
-	void renderName();
-	void render();
-
+	void renderRecord();
+	void updateRecord(int i);
 	void runRecord();
 };
 

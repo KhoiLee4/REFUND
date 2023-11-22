@@ -17,7 +17,7 @@ void Host::initTexture()
 void Host::initSprite()
 {
 	this->hostSprite.setTexture(this->textureSheet); // gan hinh anh
-	this->currentFrame = sf::IntRect(0, 0, 84.8, 87); // cai dat kich thuoc hinh cat
+	this->currentFrame = sf::IntRect(0, 0, 100, 102.5); // cai dat kich thuoc hinh cat
 	this->hostSprite.setTextureRect(this->currentFrame); // cat hinh
 	this->hostSprite.setScale(1.5f, 1.5f); //Increase sprite size
 	this->hostSprite.setPosition(hostX, hostY); // cai dat vi tri cho chu nha
@@ -65,8 +65,8 @@ void Host::updateAnimation()
 		{
 			// di chuyen sang khung hinh ke tiep de tao chuyen dong
 			this->currentFrame.top = 0.f;
-			this->currentFrame.left += 84.8f;
-			if (this->currentFrame.left >= 424.f)
+			this->currentFrame.left += 100.f;
+			if (this->currentFrame.left >= 400.f)
 				this->currentFrame.left = 0;
 
 			this->animationTimer.restart(); // dat lai thoi gian
@@ -80,9 +80,9 @@ void Host::updateAnimation()
 		if (this->animationTimer.getElapsedTime().asSeconds() >= 0.3f)
 		{
 			// di chuyen sang khung hinh ke tiep de tao chuyen dong
-			this->currentFrame.top = 87.f;
-			this->currentFrame.left += 84.8f;
-			if (this->currentFrame.left >= 424.f)
+			this->currentFrame.top = 102.5f;
+			this->currentFrame.left += 100.f;
+			if (this->currentFrame.left >= 400.f)
 				this->currentFrame.left = 0;
 
 			this->animationTimer.restart(); // dat lai thoi gian

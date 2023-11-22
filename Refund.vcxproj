@@ -146,6 +146,7 @@
     <ClCompile Include="Noise.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Record.cpp" />
+    <ClCompile Include="Setting.cpp" />
     <ClCompile Include="Win.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +163,7 @@
     <ClInclude Include="Noise.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Record.h" />
+    <ClInclude Include="Setting.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Win.h" />
   </ItemGroup>

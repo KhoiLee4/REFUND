@@ -3,15 +3,15 @@
 void Record::initWindow()
 {
 	//Create game window
-	this->window.create(sf::VideoMode(screenWidth, screenHight), "Refund", sf::Style::Close | sf::Style::Titlebar);
+	window = new sf::RenderWindow(sf::VideoMode(screenWidth, screenHight), "Refund", sf::Style::Close | sf::Style::Titlebar);
 	//Set frame rate
-	this->window.setFramerateLimit(144);
+	window->setFramerateLimit(144);
 }
 
 void Record::initBackGround()
 {
 	// tao backgruond
-	backgroundTexture.loadFromFile("Data/Textures/Background/Record.png"); // nap hinh vao
+	backgroundTexture.loadFromFile("Data/Textures/Background/Home.jpg"); // nap hinh vao
 	background.setTexture(&backgroundTexture); // gan backgroundTexture cho background (lay backgroundTexture lam nen)
 	background.setSize(sf::Vector2f(screenWidth, screenHight)); // dat kich thuot cho back ground
 }
@@ -24,44 +24,54 @@ void Record::initFont()
 	}
 }
 
-void Record::initRecordTime()
+void Record::initText()
 {
-	this->recordTime.restart();
+	t0.setFont(font);
+	t0.setCharacterSize(sizetext + 15);
+	t0.setPosition(col + 200, 100);
+	t0.setFillColor(sf::Color(0, 0, 0));
+
+	t1.setFont(font);
+	t1.setCharacterSize(sizetext);
+	t1.setPosition(col, rowDef);
+	t1.setFillColor(sf::Color(0, 0, 0));
+
+	t2.setFont(font);
+	t2.setCharacterSize(sizetext);
+	t2.setPosition(col + 100, rowDef);
+	t2.setFillColor(sf::Color(0, 0, 0));
+
+	t3.setFont(font);
+	t3.setCharacterSize(sizetext);
+	t3.setPosition(col + 400, rowDef);
+	t3.setFillColor(sf::Color(0, 0, 0));
 }
 
-void Record::initRecordFrame()
+void Record::initData()
 {
-	recordFrame.setSize(sf::Vector2f(500, 500));
-	recordFrame.setPosition(10, 10);
-	recordFrame.setFillColor(sf::Color::Cyan);
-}
+	data = new Data[11];
+	std::ifstream inFile("Record.txt");
 
-void Record::initRecordTimeList()
-{
-	inFile.open("Record.txt");
+	if (inFile.is_open()) 
+	{
+		for (int i = 0; i < 11; i++)
+		{
+			if (std::getline(inFile, data[i].name));
 
-	// Kiem tra xem tep da mo duoc chua
-	if (!inFile.is_open()) {
-		std::cerr << "Failed to load file" << std::endl;
-	}
-
-	std::string name;
-	float number;
-
-	while (std::getline(inFile, name)) {
-		if (inFile >> number) {
-			recordTimeList.push_back(number);
-		}
-		else {
-			std::cerr << "Failed to load" << std::endl;
+			std::string score;
+			if (std::getline(inFile, score))
+			{
+				data[i].score = std::stof(score);
+			}
 		}
 
-		// bo qua dong thua
-		std::string discard;
-		std::getline(inFile, discard);
+		inFile.close();
 	}
-
-	inFile.close();
+	else 
+	{
+		std::cerr << "Unable to open file for reading." << std::endl;
+	}
+	now = data[10];
 }
 
 Record::Record()
@@ -69,57 +79,54 @@ Record::Record()
 	initWindow();
 	initBackGround();
 	initFont();
-	initRecordTime();
-	initRecordTimeList();
-	initRecordFrame();
+	initText();
+	initData();
 }
 
 Record::~Record()
 {
+	delete[] data;
 }
 
-void Record::merge(std::vector<float>& arr, int left, int middle, int right)
+void Record::merge(Data *arr, int left, int middle, int right)
 {
 	int n1 = middle - left + 1;
 	int n2 = right - middle;
 	// Tạo các mảng tạm thời
-	std::vector<float> L(n1);
-	std::vector<float> R(n2);
+	Data *L = new Data[n1];
+	Data *R = new Data[n2];
 	// Sao chép dữ liệu vào các mảng tạm thời L[] và R[]
-	for (int i = 0; i < n1; i++) {
+	for (int i = 0; i < n1; i++) 
+	{
 		L[i] = arr[left + i];
 	}
-	for (int j = 0; j < n2; j++) {
+	for (int j = 0; j < n2; j++) 
+	{
 		R[j] = arr[middle + 1 + j];
 	}
 	// Merge các mảng tạm thời thành mảng chính arr[]
 	int i = 0, j = 0, k = left;
 	while (i < n1 && j < n2) {
-		if (L[i] <= R[j]) {
-			arr[k] = L[i];
-			i++;
+		if (L[i].score <= R[j].score) {
+			arr[k++] = L[i++];
 		}
 		else {
-			arr[k] = R[j];
-			j++;
+			arr[k++] = R[j++];
 		}
-		k++;
 	}
 	// Sao chép các phần tử còn lại của L[] (nếu có)
 	while (i < n1) {
-		arr[k] = L[i];
-		i++;
-		k++;
+		arr[k++] = L[i++];
 	}
 	// Sao chép các phần tử còn lại của R[] (nếu có)
 	while (j < n2) {
-		arr[k] = R[j];
-		j++;
-		k++;
+		arr[k++] = R[j++];
 	}
+	delete[] L;
+	delete[] R;
 }
 
-void Record::mergeSort(std::vector<float>& arr, int left, int right)
+void Record::mergeSort(Data *arr, int left, int right)
 {
 	if (left < right) {
 		int middle = left + (right - left) / 2;  // Tim diem giua cua mang
@@ -132,79 +139,109 @@ void Record::mergeSort(std::vector<float>& arr, int left, int right)
 
 void Record::sortRecord()
 {
-	mergeSort(recordTimeList, 0, recordTimeList.size() - 1);
-}
-
-void Record::update()
-{
-	while (this->window.pollEvent(this->ev))
-		//if (this->window.pollEvent(this->ev))
+	mergeSort(data, 0, 11 - 1);
+	std::ofstream outputFile("Record.txt");
+	if (outputFile.is_open())
 	{
-		// truong hop bam tat cua so
-		if (this->ev.type == sf::Event::Closed)
-			this->window.close(); // dong cua so
+		for (int i = 0; i < 10; i++)
+		{
+			outputFile << data[i].name << "\n";
+			outputFile << data[i].score << "\n";
+		}
 
-		// truong hop bam nut ESC
-		else if (this->ev.type == sf::Event::KeyPressed && this->ev.key.code == sf::Keyboard::Escape)
-			this->window.close(); // dong cua so
+		outputFile.close();
 	}
-	sortRecord();
-}
-
-void Record::renderBackGround()
-{
-	window.draw(background);
-}
-
-void Record::renderFrame()
-{
-	window.draw(this->recordFrame);
-}
-
-void Record::renderTime()
-{
-	for (int i = 0; i < userName.size(); i++)
+	else
 	{
-		sf::Text text;
-		text.setFont(font);
-		text.setCharacterSize(24);
-		text.setString(std::to_string(recordTimeList[i]));
-		text.setFillColor(sf::Color::White);
-		text.setPosition(40, (i+1) * 2);
-
-		window.draw(text);
+		std::cerr << "Unable to open file for appending.\n";
 	}
 }
 
-void Record::renderName()
+void Record::renderRecord()
 {
-	for (int i = 0; i < userName.size(); i++)
+	window->draw(t0);
+	for (int i = 0; i < 10; i++)
 	{
-		sf::Text text;
-		text.setFont(font);
-		text.setCharacterSize(24);
-		text.setString(userName[i]);
-		text.setFillColor(sf::Color::White);
-		text.setPosition(20, (i+1) * 2);
-
-		window.draw(text);
+		updateRecord(i);
+		t1.setPosition(col, rowDef + i * row);
+		t2.setPosition(col + 100, rowDef + i * row);
+		t3.setPosition(col + 400, rowDef + i * row);
+		window->draw(t1);
+		window->draw(t2);
+		window->draw(t3);
 	}
+	t1.setString("Current record:");
+	t2.setString(now.name);
+	t3.setString(std::to_string(now.score));
+	t1.setPosition(col - 150, 700);
+	t2.setPosition(col + 170 , 700);
+	t3.setPosition(col + 320, 700);
+	window->draw(t1);
+	window->draw(t2);
+	window->draw(t3);
 }
 
-void Record::render()
+void Record::updateRecord(int i)
 {
-	renderBackGround();
-	renderFrame();
-	renderName();
-	renderTime();
+	t1.setString(std::to_string(i+1));
+	t2.setString(data[i].name);
+	t3.setString(std::to_string(data[i].score));
 }
 
 void Record::runRecord()
 {
-	// bat dau
-	while (window.isOpen())
-	{
-		update();
-		render();
+	sf::Texture exitTexture;
+	exitTexture.loadFromFile("Data/Textures/Button/button_exit.png");
+	sf::Sprite exitButton(exitTexture);
+	exitButton.setPosition(screenWidth - 90, screenHight - 90);
+
+	// -- chay chuong trinh -- //
+	t0.setString("RECORD");
+	while (window->isOpen()) {
+		sf::Event ev;
+		while (window->pollEvent(ev)) {
+			// truong hop bam tat cua so
+			if (ev.type == sf::Event::Closed) {
+				window->close(); // dong cua so
+			}
+			// truong hop bam nut ESC
+			else if (ev.type == sf::Event::KeyPressed && ev.key.code == sf::Keyboard::Escape)
+			{
+				window->close(); // dong cua so
+			}
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+			{
+				window->close(); // dong cua so
+				Menu menu;
+				menu.runMenu();
+			}
+			// truong hop nhan chuot
+			else if (ev.type == sf::Event::MouseButtonPressed)
+			{
+				// nhan chuot trai
+				if (ev.mouseButton.button == sf::Mouse::Left)
+				{
+					sf::Vector2i mousePosition = sf::Mouse::getPosition(*window); // lay toa do hien tai cua con tro chuot
+					// kiem tra vi tri chuot nam o nut nao
+					if (exitButton.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePosition)))
+					{
+						window->close();
+						Menu menu;
+						menu.runMenu();
+					}
+				}
+			}
+		}
+		// lam sach cua so
+		window->clear();
+		// ve background
+		window->draw(background);
+		// ve nut
+		window->draw(exitButton);
+		// ve chu
+		sortRecord();
+		renderRecord();
+		// day hinh ve tu bo dem len
+		window->display();
 	}
 }

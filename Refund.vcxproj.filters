@@ -57,6 +57,9 @@
     <ClCompile Include="Lose.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Setting.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -102,6 +105,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Lose.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Setting.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

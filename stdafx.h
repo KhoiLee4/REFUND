@@ -9,6 +9,7 @@
 #include<math.h>
 #include <chrono>
 #include <thread>
+#include <string.h>
 
 // SFMl
 #include<SFML/System.hpp>

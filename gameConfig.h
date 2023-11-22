@@ -1,17 +1,23 @@
 #pragma once
+
 // kich thuoc mang hinh
 #define screenWidth 1440
 #define screenHight 810
 
+// mau sac
+//#define den sf::Color(0, 0, 0)
+//#define trang sf::Color(255, 255, 255)
+//#define xanh sf::Color(120, 160, 195)
+
 // thanh tieng on
-#define noiseWidth 600
+#define noiseWidth 1000
 #define noiseHight 30
 #define noiseX (screenWidth - noiseWidth) / 2
-#define noiseY 10
+#define noiseY 20
 
 // do tai vi tri lay
-#define carX 100
-#define carY screenHight / 2 - 300
+#define carX 110
+#define carY screenHight / 2 - 320
 #define itemX carX + 130
 #define itemY carY + 320
 
@@ -46,11 +52,11 @@
 #define itemLocationX_03 locationX_03 + 48 - 28
 #define itemLocationY_03 locationY_03 + 45 - 20
 
-#define itemLocationX_04 locationX_04 + 48 - 25
-#define itemLocationY_04 locationY_04 + 45 - 41
+#define itemLocationX_04 locationX_04 + 48 - 21
+#define itemLocationY_04 locationY_04 + 45 - 35
 
-#define itemLocationX_05 locationX_05 + 48 - 25
-#define itemLocationY_05 locationY_05 + 45 - 39
+#define itemLocationX_05 locationX_05 + 48 - 23
+#define itemLocationY_05 locationY_05 + 45 - 35
 
 
 
@@ -76,15 +82,23 @@
 
 
 // nhan vat chu nha
-#define hostX 1000
-#define hostY 700
+#define hostX 2040 + mapX
+#define hostY 2640 + mapY
 
 
 // nhan vat trom
 #define thiefX 600
 #define thiefY 365
 
+// ky luc
+#define col 400
+#define row 45
+#define rowDef 170
+#define sizetext 40
 
+// hack
+#define WIN 0
+#define LOSE 0
 
 
 

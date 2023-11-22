@@ -2,6 +2,8 @@
 
 #include <fstream>
 #include <string.h>
+#include "Lose.h"
+#include "Win.h"
 #include "Noise.h"
 #include "Host.h"
 #include "Done.h"
@@ -32,6 +34,8 @@ private:
 	std::ofstream outFile;
 	std::string name;
 	sf::Clock recordTime;
+	sf::SoundBuffer buffer;
+	sf::Sound sound;
 	float elapsedTime; // luu thoi gian ky luc
 	float thresholdDistance; // khoang cach toi thieu de xem la da den gan
 	bool checkGameWinner; // kiem tra da thang hay chua
@@ -42,6 +46,7 @@ private:
 	//std::vector<bool> done;
 	//sf::Texture doneTexture;
 	//sf::Sprite doneSprite;
+	
 	Noise *noise; // tieng on
 	Host *host; // chu nha
 	Done *done; // hoan thanh tra do
@@ -49,10 +54,13 @@ private:
 	ItemPick *itemPick; // do tren tay nhan vat
 	Item *item; // do tai vi tri ban dau
 	Player *player; // nhan vat
-	Map* map;
+	//Lose *lose; // man hinh lose
+	//Win *win; // man hinh win
+	Map *map; // map
 
 	void initWindow(); // khoi tao cua so
 	void initRecordTime(); // khoi tao thoi gian luu ky luc
+	//void initWinLose(); // khoi tao Win Lose
 	void initNoise(); // khoi tao tieng on
 	void initHost(); // khoi tao chu nha
 	void initDone(); // khoi tao bien hoan thanh tra do
@@ -61,6 +69,7 @@ private:
 	void initItem(); // khoi tao do tai vi tri ban dau
 	void initPlayer(); // khoi tao nhan vat
 	void initMap(); // khoi tao map
+	void initSound();
 
 public:
 	Game(); 

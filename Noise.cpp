@@ -15,7 +15,7 @@ void Noise::initNoiseBar()
 void Noise::initNoiseIndex()
 {
     this->currentNoise = 0.f; // luong tieng on ban dau
-    this->maxNoise = 20000.f; // luong tieng on toi da
+    this->maxNoise = 500.f; // luong tieng on toi da
 }
 
 Noise::Noise()
@@ -37,7 +37,7 @@ bool Noise::checkNoiseMax()
 
 void Noise::updateNoiseBar()
 {
-    noiseBar.setSize(sf::Vector2f(currentNoise * 3, 30)); // thay doi hien thi luong teng on
+    noiseBar.setSize(sf::Vector2f(currentNoise * 2, 30)); // thay doi hien thi luong teng on
 }
 
 void Noise::setNoiseIndex(float index)

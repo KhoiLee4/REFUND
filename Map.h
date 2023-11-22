@@ -26,6 +26,8 @@ private:
 	sf::Sprite wall2Sprite;
 	sf::Texture wall3Texture;
 	sf::Sprite wall3Sprite;
+	sf::Texture wall4Texture;
+	sf::Sprite wall4Sprite;
 	//Player player;
 
 	void initTexture();
@@ -44,5 +46,6 @@ public:
 	void render1(sf::RenderTarget& target); // ve tuong 1
 	void render2(sf::RenderTarget& target); // ve tuong 2
 	void render3(sf::RenderTarget& target); // ve tuong 3
+	void render4(sf::RenderTarget& target); // ve tuong 4
 };
 
